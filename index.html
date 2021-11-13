@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <input type="text" placeholder="請輸入關鍵字" class="keyword">
+
+  <select class="limit">
+    <option value="30">請選擇你要篩選的筆數</option>
+    <option value="3">3</option>
+    <option value="10">10</option>
+  </select>
+
+  <select class="category">
+    <option value="">類別</option>
+    <option value="ScenicSpot">景點</option>
+    <option value="Restaurant">美食</option>
+  </select>
+
+  <select class="city">
+    <option value="">不分縣市</option>
+    <option value="Taipei">臺北市</option>
+    <option value="NewTaipei">新北市</option>
+  </select>
+
+  <input type="button" value="search" class="send">
+
+  <h2>景點列表</h2>
+  <ul class="list"></ul>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/3.2.0/sha.js"></script>
+<script src="main.js"></script>
+
+</html>
