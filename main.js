@@ -26,8 +26,14 @@ send.addEventListener("click", function (e) {
         if (item.Picture.PictureUrl1) {
           const img = document.createElement("img")
           img.src = item.Picture.PictureUrl1
-          // document.body.append(img)
-          str += `<div class="list_card"><img src="${img.src}" class="list_img"><span class="list_sapn">${item.Name}</sapn></div>`
+          str += 
+            `
+            <div class="list_card">
+              <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+              <span class="list_sapn">${item.Name}</span>
+              <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+            </div>
+            `
         }
       })
       list.innerHTML = str
