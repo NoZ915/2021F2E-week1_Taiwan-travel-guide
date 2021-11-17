@@ -10,30 +10,53 @@
 </head>
 
 <body>
-  <input type="text" placeholder="請輸入關鍵字" class="keyword">
+  <header>
+    <div class="header_container">
+      <img src="./img/logo.png" alt="" class="logo_img">
+      <nav>
+        <a href="##">
+          <img src="./img/icon_triangle.png" alt="" class="nav_icon">
+          <span class="nav_span red">景點活動</span>
+        </a>
+        <a href="##">
+          <img src="./img/icon_rectangle.png" alt="" class="nav_icon">
+          <span class="nav_span yellow">美食住宿</span>
+        </a>
+        <a href="##">
+          <img src="./img/icon_circle.png" alt="" class="nav_icon">
+          <span class="nav_span green">景點交通</span>
+        </a>
+      </nav>
+    </div>
+  </header>
 
-  <select class="limit">
-    <option value="30">請選擇你要篩選的筆數</option>
-    <option value="3">3</option>
-    <option value="10">10</option>
-  </select>
+  <section">
+    <div class="banner_container">
+      <img src="./img/homepage.png" alt="" class="banner-img">
+      <div class="search_container">
+        <img src="./img/search-img.png" alt="" class="search-img">
+        <div class="search-row1">
+          <input type="text" placeholder="請輸入關鍵字" class="keyword">
+        </div>
+        <div class="search-row2">
+          <select class="category">
+            <option value="">類別</option>
+            <option value="ScenicSpot">景點</option>
+            <option value="Activity">活動</option>
+          </select>
+          <select class="city">
+            <option value="">不分縣市</option>
+            <option value="Taipei">臺北市</option>
+            <option value="NewTaipei">新北市</option>
+          </select>
+          <button><img src="./img/icon_search.png" alt=""></button>
+        </div>
+      </div>
+    </div>
+    </section>
 
-  <select class="category">
-    <option value="">類別</option>
-    <option value="ScenicSpot">景點</option>
-    <option value="Restaurant">美食</option>
-  </select>
-
-  <select class="city">
-    <option value="">不分縣市</option>
-    <option value="Taipei">臺北市</option>
-    <option value="NewTaipei">新北市</option>
-  </select>
-
-  <input type="button" value="search" class="send">
-
-  <h2>景點列表</h2>
-  <div class="list"></div>
+    <h2>景點列表</h2>
+    <div class="list"></div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
