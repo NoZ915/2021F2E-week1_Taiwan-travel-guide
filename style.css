@@ -294,23 +294,74 @@ nav > a{
   background-color: #fff;
 }
 /* ---------------- 
+  |  左右按鈕的部分  | 
+  ---------------- */
+.flex-decoration_row{
+  display: flex;
+  flex-direction: row;
+}
+.next-page_left-button{
+  display: flex;
+  align-items: center;
+  margin-left: 45px;
+}
+.next-page_left-button a{
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-color: #0D0B0C;
+  box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+  border-radius: 6px;
+  position: relative;
+}
+.next-page_left-button i{
+  font-size: 25px;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  color: #fff;
+}
+.next-page_right-button{
+  display: flex;
+  padding-left: 21px;
+  align-items: center;
+  z-index: 10;
+}
+.next-page_right-button a{
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-color: #0D0B0C;
+  box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+  border-radius: 6px;
+  position: relative;
+}
+.next-page_right-button i{
+  font-size: 25px;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  color: #fff;
+}
+/* ---------------- 
   |  slide的部分  | 
   ---------------- */
 .slides{
-  /* width: 1280px; */
+  display: flex;
+  transition: .5s transform ease-in-out;
+}
+.slide_container{
+  display: flex;
+  width: 1062px;
   height: 250px;
-  margin-left: 90px;
+  margin-left: 21px;
   margin-top: 12px;
-  /* overflow: hidden; */
+  overflow: hidden;
   position: relative;
-
-  /* transition: .5s transform ease-in-out; */
-}
-.slide{
-  display: inline-block;
-  list-style: none;
-  position: absolute;
-}
-.slide:nth-of-type(2){
-  /* left: 100%; */
 }

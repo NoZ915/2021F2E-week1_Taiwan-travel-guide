@@ -51,39 +51,39 @@ send.addEventListener("click", function (e) {
 //--------------------------------
 //       hot-city_conatiner      
 //--------------------------------
-slides.addEventListener("click", function (e) {
+// slides.addEventListener("click", function (e) {
 
-  axios.get(
-    `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?&$top=50&$format=JSON`,
-    {
-      headers: getAuthorizationHeader()
-    }
-  )
-    .then(function (response) {
-      const thisData = response.data
-      console.log(thisData)
-      let str = ""
+//   axios.get(
+//     `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?&$top=50&$format=JSON`,
+//     {
+//       headers: getAuthorizationHeader()
+//     }
+//   )
+//     .then(function (response) {
+//       const thisData = response.data
+//       console.log(thisData)
+//       let str = ""
 
-      thisData.forEach(item => {
-        if (item.Picture.PictureUrl1) {
-          const img = document.createElement("img")
-          img.src = item.Picture.PictureUrl1
-          str +=
-            `
-            <div class="list_card">
-              <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-              <span class="list_sapn">${item.Name}</span>
-              <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
-            </div>
-            `
-        }
-      })
-      list.innerHTML = str
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
-})
+//       thisData.forEach(item => {
+//         if (item.Picture.PictureUrl1) {
+//           const img = document.createElement("img")
+//           img.src = item.Picture.PictureUrl1
+//           str +=
+//             `
+//             <div class="list_card">
+//               <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+//               <span class="list_sapn">${item.Name}</span>
+//               <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+//             </div>
+//             `
+//         }
+//       })
+//       list.innerHTML = str
+//     })
+//     .catch(function (error) {
+//       console.log(error)
+//     })
+// })
 
 
 
@@ -106,3 +106,21 @@ function getAuthorizationHeader() {
 
 //拿到 App ID 和 App Key 後就可以開始拿資料了，只是取資料的時候必須使用平臺提供的 HMAC 認證授權機制。
 //HMAC 授權機制在每次取得 API 時要在 header 塞兩個參數：Authorization 和 X-Date。
+
+
+
+//--------------------------------
+//     a新增onclick事件，可滑動
+//--------------------------------
+const leftButton = document.querySelector('.next-page_left-anchor')
+const rightButton = document.querySelector('.next-page_right-anchor')
+const slides = document.querySelector('.slides')
+
+leftButton.addEventListener('click', function () {
+  slides.style = "transform: translateX(-1062px)"
+  console.log("hi")
+})
+rightButton.addEventListener('click', function () {
+  slides.style = "transform: translateX(0px)"
+  console.log("hi")
+})
