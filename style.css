@@ -231,6 +231,14 @@ nav > a{
 }
 
 /* -----hot city----- */
+.hot-city_container{
+  width: 1280px;
+
+  font-size: 0;
+}
+.hot-city{
+  margin-top: 90px;
+}
 .hot-city img{
   display: inline-block;
   margin-left: 90px;
@@ -245,16 +253,64 @@ nav > a{
   font-weight: normal;
   font-size: 20px;
 }
-.hot-city_container{
-  width: 1280px;
+.hot-city_block{
+  display: inline-block;
+}
+.hot-city_block p{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.hot-city_block img{
+  display: block;
+  margin: 0 auto;
+}
+.hot-city_block span{
+  display: block;
+  margin: 12.22px;
+
+  color: #FFFFFF;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.hot-city_small-block{
+  display: block;
+  padding: 7px 8px;
+  margin-right: 13px;
+  position: relative;
+  background-color: #fff;
+}
+.hot-city_small-block:nth-child(2){
+  margin-top: 5px;
+}
+.hot-city_big-block{
+  display: block;
+  padding: 14px 12px;
+  margin-right: 13px;
+  position: relative;
+  background-color: #fff;
 }
 /* ---------------- 
   |  slide的部分  | 
   ---------------- */
+.slides{
+  /* width: 1280px; */
+  height: 250px;
+  margin-left: 90px;
+  margin-top: 12px;
+  /* overflow: hidden; */
+  position: relative;
+
+  /* transition: .5s transform ease-in-out; */
+}
 .slide{
   display: inline-block;
   list-style: none;
+  position: absolute;
 }
 .slide:nth-of-type(2){
-  left: 100%;
+  /* left: 100%; */
 }
