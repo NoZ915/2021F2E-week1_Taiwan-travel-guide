@@ -1,13 +1,12 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 
 *{
-  /* outline: 1px solid #000; */
+  outline: 1px solid #000;
   margin: 0;
   padding: 0;
 
   font-family: "Noto Sans TC";
 }
-
 body, html{
   display: flex;
   justify-content: center;
@@ -16,11 +15,20 @@ body, html{
 
   background-color: #ffffff;
 }
+.gray-background{
+  background-color: #F6F7FB;
+}
 
 /* -----header----- */
 header{
   width: 1280px;
   font-size: 0;
+  background-color: #fff;
+
+  /*---固定Header---*/
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 .header_container{
   display: flex;
@@ -41,6 +49,7 @@ nav{
 nav > a{
   display: inline-block;
   margin-left: 27px;
+  text-decoration: none;
 }
 .nav_span{
   vertical-align: middle;
@@ -50,6 +59,8 @@ nav > a{
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
+}
+.underline{
   text-decoration-line: underline;
 }
 .nav_icon{
@@ -79,9 +90,19 @@ nav > a{
 }
 .banner-img{
   display: inline-block;
-  padding: 27px;
   width: 1226px;
   height: 490.06px;
+  padding: 27px;
+}
+.search-span{
+  display: block;
+  margin-top: 9px;
+  margin-bottom: 9px;
+
+  color: #FFFFFF;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
 }
 .search_container{
   position: absolute;
@@ -90,21 +111,22 @@ nav > a{
   transform: translate(-50%, -50%);
 }
 .search-row1{
-  margin-bottom: 18.5px;
+  margin-bottom: 8px;
 }
 .search-row1 input{
   border: 0;
   border-radius: 6px;
-  width: 491px;
+  width: 409px;
   height: 40px;
+  padding: 0 12px 0 24px;
+  /* padding-left: 24px; */
+  margin-right: 6px;
+  vertical-align: middle;
 
   background: #FFFFFF;
   box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
 }
 .search-row1 input::placeholder{
-  padding: 8.5px 0;
-  padding-left: 24px;
-
   color: #D2D2D2;
   font-style: normal;
   font-weight: normal;
@@ -116,27 +138,34 @@ nav > a{
   width: 219px;
   height: 40px;
   margin-right: 7px;
+  padding-left: 16px;
   vertical-align: middle;
 
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
+
+}
+.disabled{
+  color: #797979;
 }
 .search-row2 select:nth-child(2){
   margin-right: 6px;
 }
 .search-row2 button{
   display: inline-block;
+  border: 0;
   width: 40px;
   height: 40px;
   vertical-align: middle;
   background-color: transparent;
   cursor: pointer;
 }
-.search-row2 img{
+.bannner-icon-img{
   display: inline-block;
   width: 40px;
   height: 40px;
+  vertical-align: middle;
 }
 
 /* -----search_container（JS）----- */
@@ -199,4 +228,33 @@ nav > a{
   margin-top: 9.5px;
 
   font-size: 0;
+}
+
+/* -----hot city----- */
+.hot-city img{
+  display: inline-block;
+  margin-left: 90px;
+  margin-right: 14px;
+  vertical-align: middle;
+}
+.hot-city h2{
+  display: inline-block;
+  vertical-align: middle;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+}
+.hot-city_container{
+  width: 1280px;
+}
+/* ---------------- 
+  |  slide的部分  | 
+  ---------------- */
+.slide{
+  display: inline-block;
+  list-style: none;
+}
+.slide:nth-of-type(2){
+  left: 100%;
 }

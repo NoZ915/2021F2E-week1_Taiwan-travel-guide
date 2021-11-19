@@ -5,14 +5,17 @@ const list = document.querySelector('.list')
 const city = document.querySelector('.city')
 const category = document.querySelector('.category')
 
+const keywordText = keyword.value
+const cityName = city.value
+const categorySelect = category.value
+
+//--------------------------------
+//       banner container
+//--------------------------------
 send.addEventListener("click", function (e) {
-  const limitNumber = limit.value
-  const keywordText = keyword.value
-  const cityName = city.value
-  const categorySelect = category.value
 
   axios.get(
-    `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?$filter=contains(Name,'${keywordText}')&$top=${limitNumber}&$format=JSON`,
+    `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?$filter=contains(Name,'${keywordText}')&$top=50&$format=JSON`,
     {
       headers: getAuthorizationHeader()
     }
@@ -26,7 +29,7 @@ send.addEventListener("click", function (e) {
         if (item.Picture.PictureUrl1) {
           const img = document.createElement("img")
           img.src = item.Picture.PictureUrl1
-          str += 
+          str +=
             `
             <div class="list_card">
               <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
@@ -43,6 +46,50 @@ send.addEventListener("click", function (e) {
     })
 })
 
+
+
+//--------------------------------
+//       hot-city_conatiner      
+//--------------------------------
+slides.addEventListener("click", function (e) {
+
+  axios.get(
+    `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?&$top=50&$format=JSON`,
+    {
+      headers: getAuthorizationHeader()
+    }
+  )
+    .then(function (response) {
+      const thisData = response.data
+      console.log(thisData)
+      let str = ""
+
+      thisData.forEach(item => {
+        if (item.Picture.PictureUrl1) {
+          const img = document.createElement("img")
+          img.src = item.Picture.PictureUrl1
+          str +=
+            `
+            <div class="list_card">
+              <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+              <span class="list_sapn">${item.Name}</span>
+              <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+            </div>
+            `
+        }
+      })
+      list.innerHTML = str
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+})
+
+
+
+//--------------------------------
+//     getAuthorizationHeader
+//--------------------------------
 function getAuthorizationHeader() {
   //  填入自己 ID、KEY 開始
   let AppID = '4f2c7e3696e84ec2bcf3d7a3ba93abe7';
