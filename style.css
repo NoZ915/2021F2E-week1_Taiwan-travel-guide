@@ -326,7 +326,7 @@ nav > a{
 }
 .next-page_right-button{
   display: flex;
-  padding-left: 21px;
+  margin-left: 21px;
   align-items: center;
   z-index: 10;
 }

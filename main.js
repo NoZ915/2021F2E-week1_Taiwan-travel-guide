@@ -118,9 +118,7 @@ const slides = document.querySelector('.slides')
 
 leftButton.addEventListener('click', function () {
   slides.style = "transform: translateX(-1062px)"
-  console.log("hi")
 })
 rightButton.addEventListener('click', function () {
   slides.style = "transform: translateX(0px)"
-  console.log("hi")
 })
