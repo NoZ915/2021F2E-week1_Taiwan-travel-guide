@@ -15,11 +15,9 @@ body, html{
 
   background-color: #ffffff;
 }
-.gray-background{
-  background-color: #F6F7FB;
-}
 section{
   width: 1280px;
+  background-color: #F6F7FB;
 }
 
 /* -----header----- */
@@ -398,7 +396,10 @@ nav > a{
 
 /* -----hot activity----- */
 .hot-activity_container{
-  width: 1280px;
+  display: flex;
+  width: 1074px;
+  height: 504px;
+  overflow: hidden;
 
   font-size: 0;
 }
@@ -418,4 +419,13 @@ nav > a{
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
+}
+/* -----hot activity_container（JS）----- */
+
+.hot-activity_block{
+  display: flex;
+  width: 522px;
+  height: 228px;
+  margin-left: 30px;
+  background-color: #fff;
 }

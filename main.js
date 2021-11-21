@@ -87,6 +87,44 @@ send.addEventListener("click", function (e) {
 
 
 //--------------------------------
+//     hot-activity_conatiner      
+//--------------------------------
+const hotActivityContainer = document.querySelector(".hot-activity_container")
+
+axios.get(
+  `https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/?&$top=50&$format=JSON`,
+  {
+    headers: getAuthorizationHeader()
+  }
+)
+  .then(function (response) {
+    const thisData = response.data
+    console.log(thisData)
+    let str = ""
+
+    thisData.forEach(item => {
+      if (item.Picture.PictureUrl1) {
+        const img = document.createElement("img")
+        img.src = item.Picture.PictureUrl1
+        str +=
+          `
+          <div class="hot-activity_block">
+            <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+            <span class="list_sapn">${item.Name}</span>
+            <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+          </div>
+          `
+      }
+    })
+    hotActivityContainer.innerHTML = str
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+
+
+
+//--------------------------------
 //     getAuthorizationHeader
 //--------------------------------
 function getAuthorizationHeader() {
