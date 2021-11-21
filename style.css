@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 
 *{
-  outline: 1px solid #000;
+  /* outline: 1px solid #000; */
   margin: 0;
   padding: 0;
 
@@ -17,6 +17,9 @@ body, html{
 }
 .gray-background{
   background-color: #F6F7FB;
+}
+section{
+  width: 1280px;
 }
 
 /* -----header----- */
@@ -83,6 +86,7 @@ nav > a{
   display: inline-block;
   width: 1280px;
   height: 536px;
+  box-shadow: 0px 7px 13px -5px rgba(0,0,0,0.2);
 
   position: relative;
 
@@ -282,6 +286,7 @@ nav > a{
   margin-right: 13px;
   position: relative;
   background-color: #fff;
+  box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
 }
 .hot-city_small-block:nth-child(2){
   margin-top: 5px;
@@ -292,10 +297,12 @@ nav > a{
   margin-right: 13px;
   position: relative;
   background-color: #fff;
+  box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
 }
 /* ---------------- 
   |  左右按鈕的部分  | 
   ---------------- */
+/*---left---*/
 .flex-decoration_row{
   display: flex;
   flex-direction: row;
@@ -309,7 +316,7 @@ nav > a{
   display: inline-block;
   width: 32px;
   height: 32px;
-  background-color: #0D0B0C;
+  background-color: #fff;
   box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
   border-radius: 6px;
   position: relative;
@@ -322,13 +329,27 @@ nav > a{
   left: 50%;
   transform: translate(-50%,-50%);
 
-  color: #fff;
+  color: #0D0B0C;
 }
+.next-page_left-button a:hover{
+  background-color: #FF1D6C;
+  color: #fff;
+  transition: .5s hover
+}
+.next-page_left-button a:hover i{
+  color: #fff;
+  transition: .5s hover
+}
+
+
+/*---right---*/
 .next-page_right-button{
   display: flex;
   margin-left: 21px;
   align-items: center;
   z-index: 10;
+
+  visibility: hidden;
 }
 .next-page_right-button a{
   display: inline-block;
@@ -349,6 +370,15 @@ nav > a{
 
   color: #fff;
 }
+.next-page_right-button a:hover{
+  background-color: #FF1D6C;
+  color: #fff;
+  transition: .5s hover
+}
+.next-page_right-button a:hover i{
+  color: #fff;
+  transition: .5s hover
+}
 /* ---------------- 
   |  slide的部分  | 
   ---------------- */
@@ -364,4 +394,28 @@ nav > a{
   margin-top: 12px;
   overflow: hidden;
   position: relative;
+}
+
+/* -----hot activity----- */
+.hot-activity_container{
+  width: 1280px;
+
+  font-size: 0;
+}
+.hot-activity{
+  margin-top: 90px;
+}
+.hot-activity img{
+  display: inline-block;
+  margin-left: 90px;
+  margin-right: 14px;
+  vertical-align: middle;
+}
+.hot-activity h2{
+  display: inline-block;
+  vertical-align: middle;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
 }

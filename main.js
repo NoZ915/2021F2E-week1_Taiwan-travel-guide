@@ -5,14 +5,13 @@ const list = document.querySelector('.list')
 const city = document.querySelector('.city')
 const category = document.querySelector('.category')
 
-const keywordText = keyword.value
-const cityName = city.value
-const categorySelect = category.value
-
 //--------------------------------
 //       banner container
 //--------------------------------
 send.addEventListener("click", function (e) {
+  const keywordText = keyword.value
+  const cityName = city.value
+  const categorySelect = category.value
 
   axios.get(
     `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?$filter=contains(Name,'${keywordText}')&$top=50&$format=JSON`,
@@ -112,13 +111,19 @@ function getAuthorizationHeader() {
 //--------------------------------
 //     a新增onclick事件，可滑動
 //--------------------------------
-const leftButton = document.querySelector('.next-page_left-anchor')
-const rightButton = document.querySelector('.next-page_right-anchor')
+const leftButtonAnchor = document.querySelector('.next-page_left-anchor')
+const rightButtonAnchor = document.querySelector('.next-page_right-anchor')
+const leftButton = document.querySelector('.next-page_left-button')
+const rightButton = document.querySelector('.next-page_right-button')
 const slides = document.querySelector('.slides')
 
-leftButton.addEventListener('click', function () {
+leftButtonAnchor.addEventListener('click', function () {
   slides.style = "transform: translateX(-1062px)"
+  leftButton.style = "visibility: hidden"
+  rightButton.style = "visibility: visible"
 })
-rightButton.addEventListener('click', function () {
+rightButtonAnchor.addEventListener('click', function () {
   slides.style = "transform: translateX(0px)"
+  rightButton.style = "visibility: hidden"
+  leftButton.style = "visibility: visible"
 })
