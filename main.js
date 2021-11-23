@@ -101,9 +101,25 @@ axios.get(
     const thisData = response.data
     console.log(thisData)
     let str = ""
+    let itemArray = []
+    let dateArray = []
 
     thisData.forEach(item => {
       if (item.Picture.PictureUrl1) {
+        //把item丟進陣列裡面
+        itemArray.push(item)
+        console.log(itemArray)
+
+        //時間處理
+        const dateString = item.StartTime
+        const date = dateString.substring(0, 10)
+        const dateOnlyArray = date.split("-")
+        const dateOnlyString = dateOnlyArray.join("")
+
+        dateArray.push(dateOnlyString)
+        console.log(dateArray)
+
+        //圖片處理
         const img = document.createElement("img")
         img.src = item.Picture.PictureUrl1
         str +=
