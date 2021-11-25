@@ -89,7 +89,23 @@ send.addEventListener("click", function (e) {
 //--------------------------------
 //     hot-activity_conatiner      
 //--------------------------------
+//利用bubble sort去做時間排序
+function bubbleSort(dateArr, itemArr) {
+  for (let i = 0; i < dateArr.length; i++) {
+    for (let j = 0; j < dateArr.length - 1 - i; j++) {
+      if (dateArr[j] > dateArr[j + 1]) {
+        [dateArr[j], dateArr[j + 1]] = [dateArr[j + 1], dateArr[j]];
+        [itemArr[j], itemArr[j + 1]] = [itemArr[j + 1], itemArr[j]];
+      }
+    }
+  }
+  return dateArr, itemArr
+}
+
+//串接api
 const hotActivityContainer = document.querySelector(".hot-activity_container")
+const hotActivityRow1 = document.querySelector(".hot-activity_row1")
+const hotActivityRow2 = document.querySelector(".hot-activity_row2")
 
 axios.get(
   `https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/?&$top=50&$format=JSON`,
@@ -100,39 +116,70 @@ axios.get(
   .then(function (response) {
     const thisData = response.data
     console.log(thisData)
-    let str = ""
+    let str1 = ""
+    let str2 = ""
     let itemArray = []
     let dateArray = []
 
+    //處理時間先後排序
     thisData.forEach(item => {
       if (item.Picture.PictureUrl1) {
         //把item丟進陣列裡面
         itemArray.push(item)
-        console.log(itemArray)
 
-        //時間處理
+        //時間資料處理乾淨
         const dateString = item.StartTime
         const date = dateString.substring(0, 10)
         const dateOnlyArray = date.split("-")
         const dateOnlyString = dateOnlyArray.join("")
 
         dateArray.push(dateOnlyString)
-        console.log(dateArray)
+      }
+    })
+    bubbleSort(dateArray, itemArray)
 
+    //用整理排序過的資料取兩筆（第一筆跟第二筆資料）
+    for (let i = 0; i < 2; i++) {
+      if (itemArray[i].Picture.PictureUrl1) {
         //圖片處理
         const img = document.createElement("img")
-        img.src = item.Picture.PictureUrl1
-        str +=
+        img.src = itemArray[i].Picture.PictureUrl1
+        str1 +=
           `
           <div class="hot-activity_block">
-            <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-            <span class="list_sapn">${item.Name}</span>
-            <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+            <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="hot-activity_img">
+            <div class="hot-activity_introduction">
+              <span class="hot-activity_span">${itemArray[i].Name}</span>
+              <p class="hot-activity_p">${itemArray[i].Description}</p>
+              <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${itemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
+              <button>活動詳情</button>
+            </div>
           </div>
           `
       }
-    })
-    hotActivityContainer.innerHTML = str
+    }
+    //用整理排序過的資料取兩筆（第一筆跟第二筆資料）
+    for (let i = 2; i < 4; i++) {
+      if (itemArray[i].Picture.PictureUrl1) {
+        //圖片處理
+        const img = document.createElement("img")
+        img.src = itemArray[i].Picture.PictureUrl1
+        str2 +=
+          `
+          <div class="hot-activity_block">
+            <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="hot-activity_img">
+            <div class="hot-activity_introduction">
+              <span class="hot-activity_span">${itemArray[i].Name}</span>
+              <p class="hot-activity_p">${itemArray[i].Description}</p>
+              <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${itemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
+              <button>活動詳情</button>
+            </div>
+          </div>
+          `
+      }
+    }
+    hotActivityRow1.innerHTML = str1
+    hotActivityRow2.innerHTML = str2
   })
   .catch(function (error) {
     console.log(error)

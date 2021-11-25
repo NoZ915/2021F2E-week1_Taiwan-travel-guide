@@ -405,6 +405,7 @@ nav > a{
 }
 .hot-activity{
   margin-top: 90px;
+  margin-bottom: 13px;
 }
 .hot-activity img{
   display: inline-block;
@@ -421,11 +422,108 @@ nav > a{
   font-size: 20px;
 }
 /* -----hot activity_container（JS）----- */
-
+.hot-activity_container{
+  display: flex;
+  flex-direction: column;
+  margin-left: 90px;
+}
+.hot-activity_row1{
+  display: flex;
+  flex-direction: row;
+}
+.hot-activity_row2{
+  display: flex;
+  flex-direction: row;
+}
 .hot-activity_block{
   display: flex;
   width: 522px;
   height: 228px;
-  margin-left: 30px;
+  margin-bottom: 48px;
   background-color: #fff;
+}
+.hot-activity_block:nth-child(2){
+  margin-left: 21px;
+}
+.hot-activity_img{
+  width: 187px;
+  height: 196px;
+  margin: 16px 0 16px 16px;
+}
+.hot-activity_span{
+  display: inline-block;
+
+  margin-bottom: 14px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #0D0B0C;
+}
+.hot-activity_p{
+  width: 278px;
+  height: 102px;
+  margin-bottom: 14px;
+  /*溢出文字變點點點*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: #ACACAC;
+}
+.hot-activity_address_container{
+  display: inline-block;
+}
+.hot-activity_address_container .icon_map{
+  display: inline-block;
+  vertical-align: middle;
+}
+.hot-activity_address_span{
+  display: inline-block;
+  vertical-align: middle;
+  width: 88px;
+  height: 21px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #0D0B0C;
+}
+.hot-activity_introduction{
+  display: inline-block;
+  width: 278px;
+  height: 193px;
+  margin: 16px 25px 19px 16px;
+}
+.hot-activity_introduction button{
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #FF1D6C;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 120px;
+  height: 40px;
+  left: 147px;
+  top: 0px;
+  margin-left: 27px;
+  background-color: #fff;
+  cursor: pointer;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #FF1D6C;
+}
+.hot-activity_introduction button:hover{
+  background-color: #FF1D6C;
+  color: #fff;
+  transition: 0.4s ease-in-out;
 }
