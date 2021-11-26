@@ -9,21 +9,27 @@
   font-family: "Noto Sans TC";
 }
 body, html{
+  background-color: #F6F7FB; 
+}
+section{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  background-color: #ffffff;
-}
-section{
-  width: 1280px;
+  width: 100%;
   background-color: #F6F7FB;
+}
+.section_container{
+  max-width: 1280px;
 }
 
 /* -----header----- */
 header{
-  width: 1280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
   font-size: 0;
   background-color: #fff;
 
@@ -35,6 +41,7 @@ header{
 .header_container{
   display: flex;
   justify-content: space-between;
+  width: 1280px;
   padding: 0 108px;
   padding-top: 29px;
   padding-bottom: 18px;
@@ -82,9 +89,9 @@ nav > a{
 
 /* -----banner_container----- */
 .banner_container{
-  display: inline-block;
   width: 1280px;
   height: 536px;
+  margin: 0 auto;
   box-shadow: 0px 7px 13px -5px rgba(0,0,0,0.2);
 
   position: relative;
@@ -96,6 +103,7 @@ nav > a{
   width: 1226px;
   height: 490.06px;
   padding: 27px;
+  background-color: #fff;
 }
 .search-span{
   display: block;
@@ -242,6 +250,7 @@ nav > a{
 }
 .hot-city{
   margin-top: 90px;
+  margin-left: auto;
 }
 .hot-city img{
   display: inline-block;
@@ -411,7 +420,6 @@ nav > a{
 }
 .hot-activity img{
   display: inline-block;
-  margin-left: 90px;
   margin-right: 14px;
   vertical-align: middle;
 }
@@ -427,7 +435,6 @@ nav > a{
 .hot-activity_container{
   display: flex;
   flex-direction: column;
-  margin-left: 90px;
 }
 .hot-activity_row1{
   display: flex;
@@ -562,8 +569,11 @@ nav > a{
 /* -----footer----- */
 footer{
   display: flex;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 65px;
+  background-color: #fff;
 }
 footer span{
   font-family: Roboto;
