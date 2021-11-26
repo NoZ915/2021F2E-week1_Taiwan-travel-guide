@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url('https://fonts.googleapis.com/earlyaccess/notosanstc.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
 *{
   /* outline: 1px solid #000; */
@@ -184,6 +185,7 @@ nav > a{
   height: 243px;
   margin: 9px;
   background-color: #fff;
+  box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
 
   font-size: 0;
 }
@@ -441,6 +443,7 @@ nav > a{
   height: 228px;
   margin-bottom: 48px;
   background-color: #fff;
+  box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
 }
 .hot-activity_block:nth-child(2){
   margin-left: 21px;
@@ -526,4 +529,46 @@ nav > a{
   background-color: #FF1D6C;
   color: #fff;
   transition: 0.4s ease-in-out;
+}
+
+/* -----hot scenic spot----- */
+.hot-scenic-spot{
+  margin-top: 90px;
+  margin-bottom: 13px;
+}
+.hot-scenic-spot img{
+  display: inline-block;
+  margin-left: 90px;
+  margin-right: 14px;
+  vertical-align: middle;
+}
+.hot-scenic-spot h2{
+  display: inline-block;
+  vertical-align: middle;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+}
+.hot-scenic-spot_list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 1280px;
+  margin-bottom: 85px;
+}
+
+/* -----footer----- */
+footer{
+  display: flex;
+  align-items: center;
+  height: 65px;
+}
+footer span{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #ACACAC;
 }

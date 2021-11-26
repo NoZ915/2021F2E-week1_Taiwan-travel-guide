@@ -25,7 +25,7 @@ send.addEventListener("click", function (e) {
       let str = ""
 
       thisData.forEach(item => {
-        if (item.Picture.PictureUrl1) {
+        if (item != undefined) {
           const img = document.createElement("img")
           img.src = item.Picture.PictureUrl1
           str +=
@@ -118,14 +118,14 @@ axios.get(
     console.log(thisData)
     let str1 = ""
     let str2 = ""
-    let itemArray = []
+    let hotActivityItemArray = []
     let dateArray = []
 
     //處理時間先後排序
     thisData.forEach(item => {
       if (item.Picture.PictureUrl1) {
         //把item丟進陣列裡面
-        itemArray.push(item)
+        hotActivityItemArray.push(item)
 
         //時間資料處理乾淨
         const dateString = item.StartTime
@@ -136,22 +136,22 @@ axios.get(
         dateArray.push(dateOnlyString)
       }
     })
-    bubbleSort(dateArray, itemArray)
+    bubbleSort(dateArray, hotActivityItemArray)
 
     //用整理排序過的資料取兩筆（第一筆跟第二筆資料）
     for (let i = 0; i < 2; i++) {
-      if (itemArray[i].Picture.PictureUrl1) {
+      if (hotActivityItemArray[i].Picture.PictureUrl1) {
         //圖片處理
         const img = document.createElement("img")
-        img.src = itemArray[i].Picture.PictureUrl1
+        img.src = hotActivityItemArray[i].Picture.PictureUrl1
         str1 +=
           `
           <div class="hot-activity_block">
             <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="hot-activity_img">
             <div class="hot-activity_introduction">
-              <span class="hot-activity_span">${itemArray[i].Name}</span>
-              <p class="hot-activity_p">${itemArray[i].Description}</p>
-              <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${itemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
+              <span class="hot-activity_span">${hotActivityItemArray[i].Name}</span>
+              <p class="hot-activity_p">${hotActivityItemArray[i].Description}</p>
+              <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${hotActivityItemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
               <button>活動詳情</button>
             </div>
           </div>
@@ -160,18 +160,18 @@ axios.get(
     }
     //用整理排序過的資料取兩筆（第一筆跟第二筆資料）
     for (let i = 2; i < 4; i++) {
-      if (itemArray[i].Picture.PictureUrl1) {
+      if (hotActivityItemArray[i].Picture.PictureUrl1) {
         //圖片處理
         const img = document.createElement("img")
-        img.src = itemArray[i].Picture.PictureUrl1
+        img.src = hotActivityItemArray[i].Picture.PictureUrl1
         str2 +=
           `
           <div class="hot-activity_block">
             <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="hot-activity_img">
             <div class="hot-activity_introduction">
-              <span class="hot-activity_span">${itemArray[i].Name}</span>
-              <p class="hot-activity_p">${itemArray[i].Description}</p>
-              <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${itemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
+              <span class="hot-activity_span">${hotActivityItemArray[i].Name}</span>
+              <p class="hot-activity_p">${hotActivityItemArray[i].Description}</p>
+              <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${hotActivityItemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
               <button>活動詳情</button>
             </div>
           </div>
@@ -180,6 +180,48 @@ axios.get(
     }
     hotActivityRow1.innerHTML = str1
     hotActivityRow2.innerHTML = str2
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+
+
+
+//--------------------------------
+//     hot-ScenicSpot_conatiner
+//--------------------------------
+const hotScenicSpotList = document.querySelector(".hot-scenic-spot_list")
+axios.get(
+  `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$top=30&$format=JSON`,
+  {
+    headers: getAuthorizationHeader()
+  }
+)
+  .then(function (response) {
+    const thisData = response.data
+    console.log(thisData)
+    let str = ""
+    let hotScenicSpotItemArray = []
+
+    thisData.forEach(item => {
+      if (item.Picture.PictureUrl1) {
+        hotScenicSpotItemArray.push(item)
+      }
+    })
+    for (let i = 0; i < 10; i++) {
+      const img = document.createElement("img")
+      img.src = hotScenicSpotItemArray[i].Picture.PictureUrl1
+
+      str +=
+        `
+        <div class="list_card">
+          <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+          <span class="list_sapn">${hotScenicSpotItemArray[i].Name}</span>
+          <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${hotScenicSpotItemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
+        </div>
+        `
+    }
+    hotScenicSpotList.innerHTML = str
   })
   .catch(function (error) {
     console.log(error)
