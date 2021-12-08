@@ -10,6 +10,8 @@
 }
 body, html{
   background-color: #F6F7FB; 
+  width: 100%;
+  height: 100%;
 }
 section{
   display: flex;
@@ -513,7 +515,7 @@ nav > a{
   height: 193px;
   margin: 16px 25px 19px 16px;
 }
-.hot-activity_introduction button{
+.hot-activity_introduction a{
   display: inline-block;
   vertical-align: middle;
   border: 1px solid #FF1D6C;
@@ -526,13 +528,17 @@ nav > a{
   margin-left: 27px;
   background-color: #fff;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+
 
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
+  line-height: 35px;
   color: #FF1D6C;
 }
-.hot-activity_introduction button:hover{
+.hot-activity_introduction a:hover{
   background-color: #FF1D6C;
   color: #fff;
   transition: 0.4s ease-in-out;
@@ -581,4 +587,72 @@ footer span{
   font-weight: normal;
   font-size: 12px;
   color: #ACACAC;
+}
+
+/* -----lightbox----- */
+.lightbox {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(210, 210, 210, 0.75);
+  backdrop-filter: blur(28px);
+  z-index: -1;
+  opacity: 0;
+  overflow: auto;
+}
+.lightbox:target {
+  z-index: 2;
+  opacity: 1;
+  transition: 0.5s;
+}
+.lightbox_all{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.lightbox_left{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 676px;
+  height: 810px;
+}
+.lightbox_img{
+  margin: 32px;
+  width: 612px;
+  height: 459px;
+}
+.lightbox_span{
+  margin: 0 32px;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 26px;
+}
+.lightbox_p{
+  margin: 0 32px;
+  margin-top: 22px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+}
+.lightbox_right{
+  margin-left: 12px;
+}
+.lightbox_a{
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  background-color: #FF1D6C;
+  box-shadow: 0px 2px 4px rgba(13, 11, 12, 0.2);
+  border-radius: 8px;
+}
+.lightbox_a i{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  font-size: 30px;
+  color: #fff;
 }

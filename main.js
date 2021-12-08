@@ -106,6 +106,7 @@ function bubbleSort(dateArr, itemArr) {
 const hotActivityContainer = document.querySelector(".hot-activity_container")
 const hotActivityRow1 = document.querySelector(".hot-activity_row1")
 const hotActivityRow2 = document.querySelector(".hot-activity_row2")
+const lightboxContainer = document.querySelector(".lightbox_container")
 
 axios.get(
   `https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/?&$top=50&$format=JSON`,
@@ -118,6 +119,7 @@ axios.get(
     console.log(thisData)
     let str1 = ""
     let str2 = ""
+    let lightboxStr = ""
     let hotActivityItemArray = []
     let dateArray = []
 
@@ -152,13 +154,13 @@ axios.get(
               <span class="hot-activity_span">${hotActivityItemArray[i].Name}</span>
               <p class="hot-activity_p">${hotActivityItemArray[i].Description}</p>
               <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${hotActivityItemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
-              <button>活動詳情</button>
+              <a href="#${hotActivityItemArray[i].ID}">活動詳情</a>
             </div>
           </div>
           `
       }
     }
-    //用整理排序過的資料取兩筆（第一筆跟第二筆資料）
+    //用整理排序過的資料取兩筆（第三筆跟第四筆資料）
     for (let i = 2; i < 4; i++) {
       if (hotActivityItemArray[i].Picture.PictureUrl1) {
         //圖片處理
@@ -172,14 +174,37 @@ axios.get(
               <span class="hot-activity_span">${hotActivityItemArray[i].Name}</span>
               <p class="hot-activity_p">${hotActivityItemArray[i].Description}</p>
               <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${hotActivityItemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
-              <button>活動詳情</button>
+              <a href="#${hotActivityItemArray[i].ID}">活動詳情</a>
             </div>
           </div>
           `
       }
     }
+    //用整理排序過的資料取前4筆製作成lightbox
+    for (let i = 0; i < 4; i++) {
+      if (hotActivityItemArray[i].Picture.PictureUrl1) {
+        //圖片處理
+        const img = document.createElement("img")
+        img.src = hotActivityItemArray[i].Picture.PictureUrl1
+        lightboxStr +=
+          `
+            <div class="lightbox" id="${hotActivityItemArray[i].ID}">
+              <div class="lightbox_all">
+                <div class="lightbox_left">
+                  <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                  <span class="lightbox_span">${hotActivityItemArray[i].Name}</span>
+                  <p class="lightbox_p">${hotActivityItemArray[i].Description}</p>
+                </div>
+                <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+              </div>
+            </div>
+          `
+      }
+    }
+
     hotActivityRow1.innerHTML = str1
     hotActivityRow2.innerHTML = str2
+    lightboxContainer.innerHTML = lightboxStr
   })
   .catch(function (error) {
     console.log(error)
