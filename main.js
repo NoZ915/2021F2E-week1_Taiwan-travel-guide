@@ -1,9 +1,18 @@
 const keyword = document.querySelector('.keyword')
 const limit = document.querySelector('.limit')
 const send = document.querySelector('.send')
-const list = document.querySelector('.list')
+const newList = document.querySelector('.new-list')
 const city = document.querySelector('.city')
 const category = document.querySelector('.category')
+
+const hotCitySection = document.querySelector('.hot-city_section')
+const hotActivitySection = document.querySelector('.hot-activity_section')
+const hotScenicSpotSection = document.querySelector('.hot-scenic-spot_section')
+const listSection = document.querySelector('.list_section')
+const listH2 = document.querySelector(".list_h2")
+
+const wrongPageSearchSection = document.querySelector(".wrong-search-page_section")
+wrongPageSearchSection.setAttribute("class", "display_none")
 
 //--------------------------------
 //       banner container
@@ -12,6 +21,19 @@ send.addEventListener("click", function (e) {
   const keywordText = keyword.value
   const cityName = city.value
   const categorySelect = category.value
+
+  //取得選項的文字
+  const cityNameTextWithSpace = city.options[city.selectedIndex].text
+  const categorySelectTextWithSpace = category.options[category.selectedIndex].text
+  //移除取得的文字中出現的空格
+  const cityNameText = cityNameTextWithSpace.split(" ").join("")
+  const categorySelectText = categorySelectTextWithSpace.split(" ").join("")
+
+  //把所有原先的內容給移除掉
+  hotCitySection.setAttribute("class", "display_none")
+  hotActivitySection.setAttribute("class", "display_none")
+  hotScenicSpotSection.setAttribute("class", "display_none")
+  listSection.setAttribute("class", "display_flex")
 
   axios.get(
     `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?$filter=contains(Name,'${keywordText}')&$top=50&$format=JSON`,
@@ -23,6 +45,11 @@ send.addEventListener("click", function (e) {
       const thisData = response.data
       console.log(thisData)
       let str = ""
+
+      // if (thisData.length = 0) {
+      //   wrongPageSearchSection.setAttribute("class", "section")
+      //   console.log("i am : " + response.data)
+      // }
 
       thisData.forEach(item => {
         if (item != undefined) {
@@ -38,7 +65,8 @@ send.addEventListener("click", function (e) {
             `
         }
       })
-      list.innerHTML = str
+      newList.innerHTML = str
+      listH2.innerHTML = `${cityNameText} ${categorySelectText}  <h3>（關鍵字： ${keywordText}）</h3>`
     })
     .catch(function (error) {
       console.log(error)
@@ -77,7 +105,7 @@ send.addEventListener("click", function (e) {
 //             `
 //         }
 //       })
-//       list.innerHTML = str
+//       newList.innerHTML = str
 //     })
 //     .catch(function (error) {
 //       console.log(error)
@@ -139,6 +167,10 @@ axios.get(
       }
     })
     bubbleSort(dateArray, hotActivityItemArray)
+    console.log(dateArray)
+    console.log(hotActivityItemArray)
+    dateArray.reverse();
+    hotActivityItemArray.reverse();
 
     //用整理排序過的資料取兩筆（第一筆跟第二筆資料）
     for (let i = 0; i < 2; i++) {

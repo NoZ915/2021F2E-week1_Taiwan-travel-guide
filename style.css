@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/earlyaccess/notosanstc.css');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
+/* -----整體設置----- */
 *{
   /* outline: 1px solid #000; */
   margin: 0;
@@ -23,6 +24,45 @@ section{
 }
 .section_container{
   max-width: 1280px;
+}
+
+/* -----共同擁有的東西----- */
+.icon_little-triangle{
+  display: inline-block;
+  margin-left: 90px;
+  margin-right: 14px;
+  vertical-align: middle;
+}
+h2{
+  display: inline-block;
+  vertical-align: middle;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+}
+h3{
+  display: inline-block;
+  vertical-align: middle;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #797979;
+}
+.display_none{
+  display: none;
+}
+.display_flex{
+  display: flex;
+}
+.section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: #F6F7FB;
 }
 
 /* -----header----- */
@@ -182,12 +222,20 @@ nav > a{
 }
 
 /* -----search_container（JS）----- */
+.list_section{
+  display: none;
+}
 .list{
+  margin-top: 90px;
+}
+.new-list{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   width: 1280px;
+  margin-top: 12px;
+  margin-bottom: 132px;
 }
 .list_card{
   display: inline-block;
@@ -215,6 +263,13 @@ nav > a{
   font-weight: normal;
   font-size: 14px;
   line-height: 21px;
+
+  /*溢出文字變點點點*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .address_span{
   display: inline-block;
@@ -253,20 +308,6 @@ nav > a{
 .hot-city{
   margin-top: 90px;
   margin-left: auto;
-}
-.hot-city img{
-  display: inline-block;
-  margin-left: 90px;
-  margin-right: 14px;
-  vertical-align: middle;
-}
-.hot-city h2{
-  display: inline-block;
-  vertical-align: middle;
-
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
 }
 .hot-city_block{
   display: inline-block;
@@ -421,17 +462,7 @@ nav > a{
   margin-bottom: 13px;
 }
 .hot-activity img{
-  display: inline-block;
-  margin-right: 14px;
-  vertical-align: middle;
-}
-.hot-activity h2{
-  display: inline-block;
-  vertical-align: middle;
-
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
+  margin-left: 0px;
 }
 /* -----hot activity_container（JS）----- */
 .hot-activity_container{
@@ -464,6 +495,12 @@ nav > a{
 }
 .hot-activity_span{
   display: inline-block;
+  /*溢出文字變點點點*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 
   margin-bottom: 14px;
   font-style: normal;
@@ -549,20 +586,6 @@ nav > a{
   margin-top: 90px;
   margin-bottom: 13px;
 }
-.hot-scenic-spot img{
-  display: inline-block;
-  margin-left: 90px;
-  margin-right: 14px;
-  vertical-align: middle;
-}
-.hot-scenic-spot h2{
-  display: inline-block;
-  vertical-align: middle;
-
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-}
 .hot-scenic-spot_list{
   display: flex;
   justify-content: center;
@@ -581,12 +604,13 @@ footer{
   height: 65px;
   background-color: #fff;
 }
-footer span{
+footer span,footer a{
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   color: #ACACAC;
+  text-decoration: none;
 }
 
 /* -----lightbox----- */
@@ -655,4 +679,31 @@ footer span{
 
   font-size: 30px;
   color: #fff;
+}
+
+/* -----wrong search page----- */
+/* .wrong-search-page_section{
+  display: none;
+} */
+.wrong-search-page{
+  display: flex;
+}
+.wrong-search-page_text{
+  display: flex;
+  flex-direction: column;
+  margin-left: 13px;
+}
+.wrong-search-page_text span:nth-child(1){
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  color: #FFB72C;
+}
+.wrong-search-page_text span:nth-child(2){
+  margin-top: 4px;
+
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 26px;
+  color: #D2D2D2;
 }

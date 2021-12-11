@@ -50,7 +50,7 @@
             <option value="Activity">活 動</option>
           </select>
           <select class="city">
-            <option value="">不分縣市</option>
+            <option value="">不 分 縣 市</option>
             <option value="Taipei">臺 北 市</option>
             <option value="NewTaipei">新 北 市</option>
             <option value="Taoyuan">桃 園 市</option>
@@ -80,10 +80,10 @@
     </div>
   </section>
 
-  <section>
+  <section class="hot-city_section">
     <div class="section_container">
       <div class="hot-city">
-        <img src="./img/icon_little-triangle.png" alt="">
+        <img src="./img/icon_little-triangle.png" alt="" class="icon_little-triangle">
         <h2>熱門城市</h2>
       </div>
       <div class="hot-city_container flex-decoration_row">
@@ -224,10 +224,10 @@
     </div>
   </section>
 
-  <section>
+  <section class="hot-activity_section">
     <div class="section_container">
       <div class="hot-activity">
-        <img src="./img/icon_little-triangle.png" alt="">
+        <img src="./img/icon_little-triangle.png" alt="" class="icon_little-triangle">
         <h2>熱門活動</h2>
       </div>
       <div class="hot-activity_container">
@@ -237,21 +237,42 @@
     </div>
   </section>
 
-  <section>
+  <section class="hot-scenic-spot_section">
     <div class="section_container">
       <div class="hot-scenic-spot">
-        <img src="./img/icon_little-triangle.png" alt="">
+        <img src="./img/icon_little-triangle.png" alt="" class="icon_little-triangle">
         <h2>熱門景點</h2>
       </div>
       <div class="hot-scenic-spot_list"></div>
     </div>
   </section>
 
+  <section class="list_section">
+    <div class="section_container">
+      <div class="list">
+        <img src="./img/icon_little-triangle.png" alt="" class="icon_little-triangle">
+        <h2 class="list_h2"></h2>
+      </div>
+      <div class="new-list"></div>
+    </div>
+  </section>
+
+  <section class="wrong-search-page_section">
+    <div class="section_container wrong-search-page">
+      <div><img src="./img/oops.png" alt=""></div>
+      <div class="wrong-search-page_text">
+        <span>Oop!</span>
+        <span>很抱歉，找不到符合此搜尋相關的內容。</span>
+      </div>
+    </div>
+  </section>
+
+
   <footer>
-    <span>Taiwan Tourguide © Code: NoZ / Design: KT</span>
+    <span>Taiwan Tourguide © <a href="https://github.com/NoZ915?tab=repositories">Code: NoZ</a> / <a
+        href="https://www.behance.net/KT_Designer">Design: KT</a></span>
   </footer>
 
-  <div class="list"></div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
