@@ -10,9 +10,9 @@ const hotActivitySection = document.querySelector('.hot-activity_section')
 const hotScenicSpotSection = document.querySelector('.hot-scenic-spot_section')
 const listSection = document.querySelector('.list_section')
 const listH2 = document.querySelector(".list_h2")
+const list = document.querySelector(".list")
 
 const wrongPageSearchSection = document.querySelector(".wrong-search-page_section")
-wrongPageSearchSection.setAttribute("class", "display_none")
 
 //--------------------------------
 //       banner container
@@ -34,6 +34,7 @@ send.addEventListener("click", function (e) {
   hotActivitySection.setAttribute("class", "display_none")
   hotScenicSpotSection.setAttribute("class", "display_none")
   listSection.setAttribute("class", "display_flex")
+  
 
   axios.get(
     `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?$filter=contains(Name,'${keywordText}')&$top=50&$format=JSON`,
@@ -46,10 +47,16 @@ send.addEventListener("click", function (e) {
       console.log(thisData)
       let str = ""
 
-      // if (thisData.length = 0) {
-      //   wrongPageSearchSection.setAttribute("class", "section")
-      //   console.log("i am : " + response.data)
-      // }
+      if (response.data.length == 0) {
+        wrongPageSearchSection.classList.remove("wrong-search-page_section")
+        wrongPageSearchSection.setAttribute("class", "section")
+        list.classList.add("display_none")
+        console.log("hi");
+      }else{
+        wrongPageSearchSection.classList.remove("section")
+        wrongPageSearchSection.setAttribute("class", "wrong-search-page_section")
+        list.classList.remove("display_none")
+      }
 
       thisData.forEach(item => {
         if (item != undefined) {

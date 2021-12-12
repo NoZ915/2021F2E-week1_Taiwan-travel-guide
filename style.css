@@ -62,6 +62,7 @@ h3{
   align-items: center;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 281px;
   background-color: #F6F7FB;
 }
 
@@ -682,9 +683,9 @@ footer span,footer a{
 }
 
 /* -----wrong search page----- */
-/* .wrong-search-page_section{
+.wrong-search-page_section{
   display: none;
-} */
+}
 .wrong-search-page{
   display: flex;
 }
