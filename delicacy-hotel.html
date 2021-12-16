@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>臺灣旅遊導覽</title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="./img/taiwan_logo.png" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="lightbox_container"></div>
+
+  <header>
+    <div class="header_container">
+      <a href="./index.html"><img src="./img/logo.png" alt="" class="logo_img"></a>
+      <nav>
+        <a href="./index.html">
+          <img src="./img/icon_triangle.png" alt="" class="nav_icon">
+          <span class="nav_span red">景點活動</span>
+        </a>
+        <a href="./delicacy-hotel.html">
+          <img src="./img/icon_rectangle.png" alt="" class="nav_icon">
+          <span class="nav_span yellow underline">美食住宿</span>
+        </a>
+        <a href="##">
+          <img src="./img/icon_circle.png" alt="" class="nav_icon">
+          <span class="nav_span green">景點交通</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="banner_container">
+    <div class="section_container">
+      <img src="./img/delicacy-hotel_page.png" alt="" class="banner-img">
+      <div class="search_container">
+        <img src="./img/search-img.png" alt="" class="search-img">
+        <span class="search-span">台北、台中、台南、屏東、宜蘭……遊遍台灣</span>
+        <div class="search-row1">
+          <input type="text" placeholder="請輸入關鍵字" class="keyword">
+          <img src="./img/icon_GPS.png" alt="" class="bannner-icon-img">
+        </div>
+        <div class="search-row2">
+          <select class="category">
+            <option value="" disabled class="disabled">類 別</option>
+            <option value="ScenicSpot">美 食</option>
+            <option value="Activity">住 宿</option>
+          </select>
+          <select class="city">
+            <option value="">不 分 縣 市</option>
+            <option value="Taipei">臺 北 市</option>
+            <option value="NewTaipei">新 北 市</option>
+            <option value="Taoyuan">桃 園 市</option>
+            <option value="Taichung">臺 中 市</option>
+            <option value="Tainan">臺 南 市</option>
+            <option value="Kaohsiung">高 雄 市</option>
+            <option value="Keelung">基 隆 市</option>
+            <option value="Hsinchu">新 竹 市</option>
+            <option value="HsinchuCounty">新 竹 縣</option>
+            <option value="MiaoliCounty">苗 栗 縣</option>
+            <option value="ChanghuaCounty">彰 化 縣</option>
+            <option value="NantouCounty">南 投 縣</option>
+            <option value="YunlinCounty">雲 林 縣</option>
+            <option value="ChiayiCounty">嘉 義 縣</option>
+            <option value="Chiayi">嘉 義 市</option>
+            <option value="PingtungCounty">屏 東 縣</option>
+            <option value="YilanCounty">宜 蘭 縣</option>
+            <option value="HualienCounty">花 蓮 縣</option>
+            <option value="TaitungCounty">臺 東 縣</option>
+            <option value="KinmenCounty">金 門 縣</option>
+            <option value="PenghuCounty">澎 湖 縣</option>
+            <option value="LienchiangCounty">連 江 縣</option>
+          </select>
+          <button class="send"><img src="./img/icon_search.png" alt="" class="bannner-icon-img"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hot-scenic-spot_section">
+    <div class="section_container">
+      <div class="hot-scenic-spot">
+        <img src="./img/icon_little-rectangle.png" alt="" class="icon_little-triangle">
+        <h2>熱門美食</h2>
+      </div>
+      <div class="hot-scenic-spot_list"></div>
+    </div>
+  </section>
+
+  <section class="hot-scenic-spot_section">
+    <div class="section_container">
+      <div class="hot-scenic-spot">
+        <img src="./img/icon_little-rectangle.png" alt="" class="icon_little-triangle">
+        <h2>推薦住宿</h2>
+      </div>
+      <div class="hot-scenic-spot_list"></div>
+    </div>
+  </section>
+
+  <section class="list_section">
+    <div class="section_container">
+      <div class="list">
+        <img src="./img/icon_little-rectangle.png" alt="" class="icon_little-triangle">
+        <h2 class="list_h2"></h2>
+      </div>
+      <div class="new-list"></div>
+    </div>
+  </section>
+
+  <section class="wrong-search-page_section">
+    <div class="section_container wrong-search-page">
+      <div><img src="./img/oops.png" alt=""></div>
+      <div class="wrong-search-page_text">
+        <span>Oop!</span>
+        <span>很抱歉，找不到符合此搜尋相關的內容。</span>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <span>Taiwan Tourguide © <a href="https://github.com/NoZ915?tab=repositories">Code: NoZ</a> / <a
+        href="https://www.behance.net/KT_Designer">Design: KT</a></span>
+  </footer>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/3.2.0/sha.js"></script>
+<script src="main.js"></script>
+<script src="delicacy-hotel.js"></script>
+
+</html>

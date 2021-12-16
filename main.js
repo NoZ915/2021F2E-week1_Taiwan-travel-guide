@@ -34,7 +34,7 @@ send.addEventListener("click", function (e) {
   hotActivitySection.setAttribute("class", "display_none")
   hotScenicSpotSection.setAttribute("class", "display_none")
   listSection.setAttribute("class", "display_flex")
-  
+
 
   axios.get(
     `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?$filter=contains(Name,'${keywordText}')&$top=50&$format=JSON`,
@@ -52,7 +52,7 @@ send.addEventListener("click", function (e) {
         wrongPageSearchSection.setAttribute("class", "section")
         list.classList.add("display_none")
         console.log("hi");
-      }else{
+      } else {
         wrongPageSearchSection.classList.remove("section")
         wrongPageSearchSection.setAttribute("class", "wrong-search-page_section")
         list.classList.remove("display_none")
@@ -316,7 +316,7 @@ function getAuthorizationHeader() {
 
 
 //--------------------------------
-//     a新增onclick事件，可滑動
+// slides: a新增onclick事件，可滑動
 //--------------------------------
 const leftButtonAnchor = document.querySelector('.next-page_left-anchor')
 const rightButtonAnchor = document.querySelector('.next-page_right-anchor')

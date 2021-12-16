@@ -106,14 +106,20 @@ nav > a{
 .nav_span{
   vertical-align: middle;
   margin-left: 8px;
+  padding-bottom: 7px;
 
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
 }
+.nav_span:hover{
+  border-bottom: solid 1px;
+  transition: 0.1s ease-in-out;
+}
 .underline{
-  text-decoration-line: underline;
+  border-bottom: solid 2px;
+  padding-bottom: 7px;
 }
 .nav_icon{
   vertical-align: middle;
