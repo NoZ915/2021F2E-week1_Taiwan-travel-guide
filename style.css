@@ -714,3 +714,17 @@ footer span,footer a{
   line-height: 26px;
   color: #D2D2D2;
 }
+
+/* -----hot restaurant----- */
+.hot-restaurant{
+  margin-top: 90px;
+  margin-left: auto;
+}
+.hot-restaurant_list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 1280px;
+  margin-bottom: 85px;
+}
