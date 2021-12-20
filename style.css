@@ -726,5 +726,18 @@ footer span,footer a{
   align-items: center;
   flex-wrap: wrap;
   width: 1280px;
+}
+
+/* -----hot hotel----- */
+.hot-hotel{
+  margin-top: 90px;
+  margin-left: auto;
+}
+.hot-hotel_list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 1280px;
   margin-bottom: 85px;
 }
