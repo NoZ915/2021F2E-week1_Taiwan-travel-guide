@@ -340,34 +340,36 @@ slides.addEventListener("click", function (e) {
         list.classList.remove("display_none")
       }
 
-      thisData.forEach(item => {
-        if (item) {
+
+      for (let i = 0; i < 10; i++) {
+        if (thisData[i]) {
           const img = document.createElement("img")
-          img.src = item.Picture.PictureUrl1
+          img.src = thisData[i].Picture.PictureUrl1
           str +=
             `
-            <a class="list_card" href="#${item.ID}ScenicSpot">
-              <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-              <span class="list_sapn">${item.Name}</span>
-              <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
-            </a>
-            `
+          <a class="list_card" href="#${thisData[i].ID}ScenicSpot">
+            <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+            <span class="list_sapn">${thisData[i].Name}</span>
+            <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${thisData[i].Address ?? "沒有提供詳細地址"}</span></div>
+          </a>
+          `
 
           lightboxStr +=
             `
-            <div class="lightbox" id="${item.ID}ScenicSpot">
-              <div class="lightbox_all">
-                <div class="lightbox_left">
-                  <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
-                  <span class="lightbox_span">${item.Name}</span>
-                  <p class="lightbox_p">${item.DescriptionDetail}</p>
-                </div>
-                <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+          <div class="lightbox" id="${thisData[i].ID}ScenicSpot">
+            <div class="lightbox_all">
+              <div class="lightbox_left">
+                <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                <span class="lightbox_span">${thisData[i].Name}</span>
+                <p class="lightbox_p">${thisData[i].DescriptionDetail}</p>
               </div>
+              <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
             </div>
-          `
+          </div>
+        `
         }
-      })
+      }
+
       newList.innerHTML = str
       listH2.innerHTML = `${e.target.getAttribute('data-string')}景點`
       lightboxContainer.innerHTML = lightboxStr
@@ -401,34 +403,34 @@ slides.addEventListener("click", function (e) {
         list.classList.remove("display_none")
       }
 
-      thisData.forEach(item => {
-        if (item) {
+      for (let i = 0; i < 10; i++) {
+        if (thisData[i]) {
           const img = document.createElement("img")
-          img.src = item.Picture.PictureUrl1
+          img.src = thisData[i].Picture.PictureUrl1
           str +=
             `
-            <a class="list_card" href="#${item.ID}">
-                <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-                <span class="list_sapn">${item.Name}</span>
-                <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
-            </a>
-            `
+          <a class="list_card" href="#${thisData[i].ID}Activity">
+            <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+            <span class="list_sapn">${thisData[i].Name}</span>
+            <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${thisData[i].Address ?? "沒有提供詳細地址"}</span></div>
+          </a>
+          `
 
           lightboxStr +=
             `
-            <div class="lightbox" id="${item.ID}">
-              <div class="lightbox_all">
-                <div class="lightbox_left">
-                  <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
-                  <span class="lightbox_span">${item.Name}</span>
-                  <p class="lightbox_p">${item.Description}</p>
-                </div>
-                <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+          <div class="lightbox" id="${thisData[i].ID}Activity">
+            <div class="lightbox_all">
+              <div class="lightbox_left">
+                <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                <span class="lightbox_span">${thisData[i].Name}</span>
+                <p class="lightbox_p">${thisData[i].Description}</p>
               </div>
+              <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
             </div>
-          `
+          </div>
+        `
         }
-      })
+      }
       newList2.innerHTML = str
       listH22.innerHTML = `${e.target.getAttribute('data-string')}活動`
       lightboxContainer2.innerHTML = lightboxStr
