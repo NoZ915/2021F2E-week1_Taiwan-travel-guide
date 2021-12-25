@@ -25,6 +25,10 @@ section{
 .section_container{
   max-width: 1280px;
 }
+a{
+  text-decoration: none;
+  color: #0D0B0C;
+}
 
 /* -----共同擁有的東西----- */
 .icon_little-triangle{
@@ -236,6 +240,15 @@ nav > a{
   margin-top: 90px;
 }
 .new-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 1280px;
+  margin-top: 12px;
+  margin-bottom: 132px;
+}
+.new-list-2{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -665,6 +678,13 @@ footer span,footer a{
   font-weight: normal;
   font-size: 14px;
   line-height: 21px;
+
+  /*溢出文字變點點點*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 .lightbox_right{
   margin-left: 12px;

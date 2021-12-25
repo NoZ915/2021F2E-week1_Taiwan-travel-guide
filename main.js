@@ -2,6 +2,7 @@ const keyword = document.querySelector('.keyword')
 const limit = document.querySelector('.limit')
 const send = document.querySelector('.send')
 const newList = document.querySelector('.new-list')
+const newList2 = document.querySelector('.new-list-2')
 const city = document.querySelector('.city')
 const category = document.querySelector('.category')
 
@@ -10,9 +11,17 @@ const hotActivitySection = document.querySelector('.hot-activity_section')
 const hotScenicSpotSection = document.querySelector('.hot-scenic-spot_section')
 const listSection = document.querySelector('.list_section')
 const listH2 = document.querySelector(".list_h2")
+const listH22 = document.querySelector(".list_h2-2")
 const list = document.querySelector(".list")
+const hotCitySpanValue = document.querySelector(".hot-city_span-value")
 
 const wrongPageSearchSection = document.querySelector(".wrong-search-page_section")
+
+const hotActivityContainer = document.querySelector(".hot-activity_container")
+const hotActivityRow1 = document.querySelector(".hot-activity_row1")
+const hotActivityRow2 = document.querySelector(".hot-activity_row2")
+const lightboxContainer = document.querySelector(".lightbox_container")
+const lightboxContainer2 = document.querySelector(".lightbox_container-2")
 
 //--------------------------------
 //       banner container
@@ -82,44 +91,6 @@ send.addEventListener("click", function (e) {
 
 
 
-//--------------------------------
-//       hot-city_conatiner      
-//--------------------------------
-// slides.addEventListener("click", function (e) {
-
-//   axios.get(
-//     `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?&$top=50&$format=JSON`,
-//     {
-//       headers: getAuthorizationHeader()
-//     }
-//   )
-//     .then(function (response) {
-//       const thisData = response.data
-//       console.log(thisData)
-//       let str = ""
-
-//       thisData.forEach(item => {
-//         if (item.Picture.PictureUrl1) {
-//           const img = document.createElement("img")
-//           img.src = item.Picture.PictureUrl1
-//           str +=
-//             `
-//             <div class="list_card">
-//               <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-//               <span class="list_sapn">${item.Name}</span>
-//               <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
-//             </div>
-//             `
-//         }
-//       })
-//       newList.innerHTML = str
-//     })
-//     .catch(function (error) {
-//       console.log(error)
-//     })
-// })
-
-
 
 //--------------------------------
 //     hot-activity_conatiner      
@@ -138,11 +109,6 @@ function bubbleSort(dateArr, itemArr) {
 }
 
 //串接api
-const hotActivityContainer = document.querySelector(".hot-activity_container")
-const hotActivityRow1 = document.querySelector(".hot-activity_row1")
-const hotActivityRow2 = document.querySelector(".hot-activity_row2")
-const lightboxContainer = document.querySelector(".lightbox_container")
-
 axios.get(
   `https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/?&$top=50&$format=JSON`,
   {
@@ -333,4 +299,141 @@ rightButtonAnchor.addEventListener('click', function () {
   slides.style = "transform: translateX(0px)"
   rightButton.style = "visibility: hidden"
   leftButton.style = "visibility: visible"
+})
+
+
+
+
+//--------------------------------
+//       hot-city_conatiner
+//--------------------------------
+slides.addEventListener("click", function (e) {
+
+  //把所有原先的內容給移除掉
+  hotCitySection.setAttribute("class", "display_none")
+  hotActivitySection.setAttribute("class", "display_none")
+  hotScenicSpotSection.setAttribute("class", "display_none")
+  listSection.setAttribute("class", "display_flex")
+
+  //上半部處理景點的資料
+  axios.get(
+    `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${e.target.getAttribute('data-index')}?&$top=50&$format=JSON`,
+    {
+      headers: getAuthorizationHeader()
+    }
+  )
+
+    .then(function (response) {
+      const thisData = response.data
+      // console.log(thisData)
+      let str = ""
+      let lightboxStr = ""
+
+      if (response.data.length == 0) {
+        wrongPageSearchSection.classList.remove("wrong-search-page_section")
+        wrongPageSearchSection.setAttribute("class", "section")
+        list.classList.add("display_none")
+        console.log("hi");
+      } else {
+        wrongPageSearchSection.classList.remove("section")
+        wrongPageSearchSection.setAttribute("class", "wrong-search-page_section")
+        list.classList.remove("display_none")
+      }
+
+      thisData.forEach(item => {
+        if (item) {
+          const img = document.createElement("img")
+          img.src = item.Picture.PictureUrl1
+          str +=
+            `
+            <a class="list_card" href="#${item.ID}ScenicSpot">
+              <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+              <span class="list_sapn">${item.Name}</span>
+              <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+            </a>
+            `
+
+          lightboxStr +=
+            `
+            <div class="lightbox" id="${item.ID}ScenicSpot">
+              <div class="lightbox_all">
+                <div class="lightbox_left">
+                  <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                  <span class="lightbox_span">${item.Name}</span>
+                  <p class="lightbox_p">${item.DescriptionDetail}</p>
+                </div>
+                <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+              </div>
+            </div>
+          `
+        }
+      })
+      newList.innerHTML = str
+      listH2.innerHTML = `${e.target.getAttribute('data-string')}景點`
+      lightboxContainer.innerHTML = lightboxStr
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+
+  //下半部處理活動的資料
+  axios.get(
+    `https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${e.target.getAttribute('data-index')}?&$top=50&$format=JSON`,
+    {
+      headers: getAuthorizationHeader()
+    }
+  )
+
+    .then(function (response) {
+      const thisData = response.data
+      // console.log(thisData)
+      let str = ""
+      let lightboxStr = ""
+
+      if (response.data.length == 0) {
+        wrongPageSearchSection.classList.remove("wrong-search-page_section")
+        wrongPageSearchSection.setAttribute("class", "section")
+        list.classList.add("display_none")
+        console.log("hi");
+      } else {
+        wrongPageSearchSection.classList.remove("section")
+        wrongPageSearchSection.setAttribute("class", "wrong-search-page_section")
+        list.classList.remove("display_none")
+      }
+
+      thisData.forEach(item => {
+        if (item) {
+          const img = document.createElement("img")
+          img.src = item.Picture.PictureUrl1
+          str +=
+            `
+            <a class="list_card" href="#${item.ID}">
+                <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+                <span class="list_sapn">${item.Name}</span>
+                <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+            </a>
+            `
+
+          lightboxStr +=
+            `
+            <div class="lightbox" id="${item.ID}">
+              <div class="lightbox_all">
+                <div class="lightbox_left">
+                  <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                  <span class="lightbox_span">${item.Name}</span>
+                  <p class="lightbox_p">${item.Description}</p>
+                </div>
+                <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+              </div>
+            </div>
+          `
+        }
+      })
+      newList2.innerHTML = str
+      listH22.innerHTML = `${e.target.getAttribute('data-string')}活動`
+      lightboxContainer2.innerHTML = lightboxStr
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
 })
