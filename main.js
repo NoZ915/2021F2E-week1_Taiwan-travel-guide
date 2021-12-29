@@ -13,6 +13,7 @@ const listSection = document.querySelector('.list_section')
 const listH2 = document.querySelector(".list_h2")
 const listH22 = document.querySelector(".list_h2-2")
 const list = document.querySelector(".list")
+const list2 = document.querySelector(".list2")
 const hotCitySpanValue = document.querySelector(".hot-city_span-value")
 
 const wrongPageSearchSection = document.querySelector(".wrong-search-page_section")
@@ -42,51 +43,156 @@ send.addEventListener("click", function (e) {
   hotCitySection.setAttribute("class", "display_none")
   hotActivitySection.setAttribute("class", "display_none")
   hotScenicSpotSection.setAttribute("class", "display_none")
+  list2.setAttribute("class", "display_none")
   listSection.setAttribute("class", "display_flex")
 
-
-  axios.get(
-    `https://ptx.transportdata.tw/MOTC/v2/Tourism/${categorySelect}/${cityName}?$filter=contains(Name,'${keywordText}')&$top=50&$format=JSON`,
-    {
-      headers: getAuthorizationHeader()
-    }
-  )
-    .then(function (response) {
-      const thisData = response.data
-      console.log(thisData)
-      let str = ""
-
-      if (response.data.length == 0) {
-        wrongPageSearchSection.classList.remove("wrong-search-page_section")
-        wrongPageSearchSection.setAttribute("class", "section")
-        list.classList.add("display_none")
-        console.log("hi");
-      } else {
-        wrongPageSearchSection.classList.remove("section")
-        wrongPageSearchSection.setAttribute("class", "wrong-search-page_section")
-        list.classList.remove("display_none")
+  //使用者搜尋景點
+  if (categorySelect == "ScenicSpot") {
+    axios.get(
+      `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${cityName}?$filter=contains(ScenicSpotName,'${keywordText}')&$top=50&$format=JSON`,
+      {
+        headers: getAuthorizationHeader()
       }
+    )
+      .then(function (response) {
+        const thisData = response.data
+        console.log(thisData)
+        let str = ""
+        let lightboxStr = ""
 
-      thisData.forEach(item => {
-        if (item != undefined) {
-          const img = document.createElement("img")
-          img.src = item.Picture.PictureUrl1
-          str +=
-            `
-            <div class="list_card">
+        if (response.data.length == 0) {
+          wrongPageSearchSection.classList.remove("wrong-search-page_section")
+          wrongPageSearchSection.setAttribute("class", "section")
+          list.classList.add("display_none")
+        } else {
+          wrongPageSearchSection.classList.remove("section")
+          wrongPageSearchSection.setAttribute("class", "wrong-search-page_section")
+          list.classList.remove("display_none")
+        }
+
+        thisData.forEach(item => {
+          if (item != undefined) {
+            const img = document.createElement("img")
+            img.src = item.Picture.PictureUrl1
+            str +=
+              `
+            <a class="list_card" href="#${item.ScenicSpotID}ScenicSpot">
               <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-              <span class="list_sapn">${item.Name}</span>
+              <span class="list_sapn">${item.ScenicSpotName}</span>
               <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+            </a> 
+            `
+
+            lightboxStr +=
+              `
+            <div class="lightbox" id="${item.ScenicSpotID}ScenicSpot">
+              <div class="lightbox_all">
+                <div class="lightbox_left">
+                  <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                  <span class="lightbox_span">${item.ScenicSpotName}</span>
+                  <p class="lightbox_p">${item.DescriptionDetail}</p>
+                  <div class="lightbox_detail">
+                    <div>
+                      <img src='./img/lightbox_address.png'>
+                      <span>${item.Address ?? "沒有提供詳細地址"}</span>
+                    </div>
+                    <div>
+                      <img src='./img/lightbox_phone.png'>
+                      <span>${item.Phone ?? "沒有提供電話號碼"}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+              </div>
             </div>
             `
-        }
+          }
+        })
+        newList.innerHTML = str
+        listH2.innerHTML = `${cityNameText} ${categorySelectText}  <h3>（關鍵字： ${keywordText}）</h3>`
+        lightboxContainer2.innerHTML = lightboxStr
       })
-      newList.innerHTML = str
-      listH2.innerHTML = `${cityNameText} ${categorySelectText}  <h3>（關鍵字： ${keywordText}）</h3>`
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  //使用者搜尋活動
+  if (categorySelect == "Activity") {
+    axios.get(
+      `https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${cityName}?$filter=contains(ActivityName,'${keywordText}')&$top=50&$format=JSON`,
+      {
+        headers: getAuthorizationHeader()
+      }
+    )
+      .then(function (response) {
+        const thisData = response.data
+        console.log(thisData)
+        let str = ""
+        let lightboxStr = ""
+
+        if (response.data.length == 0) {
+          wrongPageSearchSection.classList.remove("wrong-search-page_section")
+          wrongPageSearchSection.setAttribute("class", "section")
+          list.classList.add("display_none")
+          console.log("hi");
+        } else {
+          wrongPageSearchSection.classList.remove("section")
+          wrongPageSearchSection.setAttribute("class", "wrong-search-page_section")
+          list.classList.remove("display_none")
+        }
+
+        thisData.forEach(item => {
+          if (item != undefined) {
+            const img = document.createElement("img")
+            img.src = item.Picture.PictureUrl1
+            str +=
+              `
+              <a class="list_card" href="#${item.ActivityID}">
+                <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
+                <span class="list_sapn">${item.ActivityName}</span>
+                <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${item.Address ?? "沒有提供詳細地址"}</span></div>
+              </a> 
+              `
+
+            lightboxStr +=
+              `
+          <div class="lightbox" id ="${item.ActivityID}">
+            <div class="lightbox_all">
+              <div class="lightbox_left">
+                <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                  <span class="lightbox_span">${item.ActivityName}</span>
+                  <p class="lightbox_p">${item.Description}</p>
+                  <div class="lightbox_detail">
+                    <div>
+                      <img src='./img/lightbox_time.png'>
+                      <span>${item.StartTime.substring(0, 10)} ~ ${item.EndTime.substring(0, 10)}</span>
+                    </div>
+                    <div>
+                      <img src='./img/lightbox_address.png'>
+                      <span>${item.Address ?? "沒有提供詳細地址"}</span>
+                    </div>
+                    <div>
+                      <img src='./img/lightbox_phone.png'>
+                      <span>${item.Phone ?? "沒有提供電話號碼"}</span>
+                    </div>
+                  </div>
+              </div>
+              <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+            </div>
+            </div>
+          `
+          }
+        })
+        newList.innerHTML = str
+        listH2.innerHTML = `${cityNameText} ${categorySelectText}  <h3>（關鍵字： ${keywordText}）</h3>`
+        lightboxContainer.innerHTML = lightboxStr
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
 })
 
 
@@ -156,10 +262,10 @@ axios.get(
           <div class="hot-activity_block">
             <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="hot-activity_img">
             <div class="hot-activity_introduction">
-              <span class="hot-activity_span">${hotActivityItemArray[i].Name}</span>
+              <span class="hot-activity_span">${hotActivityItemArray[i].ActivityName}</span>
               <p class="hot-activity_p">${hotActivityItemArray[i].Description}</p>
               <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${hotActivityItemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
-              <a href="#${hotActivityItemArray[i].ID}">活動詳情</a>
+              <a href="#${hotActivityItemArray[i].ActivityID}">活動詳情</a>
             </div>
           </div>
           `
@@ -171,15 +277,16 @@ axios.get(
         //圖片處理
         const img = document.createElement("img")
         img.src = hotActivityItemArray[i].Picture.PictureUrl1
+        console.log(hotActivityItemArray[i].ActivityID)
         str2 +=
           `
           <div class="hot-activity_block">
             <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="hot-activity_img">
             <div class="hot-activity_introduction">
-              <span class="hot-activity_span">${hotActivityItemArray[i].Name}</span>
+              <span class="hot-activity_span">${hotActivityItemArray[i].ActivityName}</span>
               <p class="hot-activity_p">${hotActivityItemArray[i].Description}</p>
               <div class="hot-activity_address_container"><img src="./img/icon_map.png" class="icon_map"><span class="hot-activity_address_span">${hotActivityItemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
-              <a href="#${hotActivityItemArray[i].ID}">活動詳情</a>
+              <a href="#${hotActivityItemArray[i].ActivityID}">活動詳情</a>
             </div>
           </div>
           `
@@ -191,17 +298,32 @@ axios.get(
         //圖片處理
         const img = document.createElement("img")
         img.src = hotActivityItemArray[i].Picture.PictureUrl1
+
         lightboxStr +=
           `
-            <div class="lightbox" id="${hotActivityItemArray[i].ID}">
-              <div class="lightbox_all">
-                <div class="lightbox_left">
-                  <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
-                  <span class="lightbox_span">${hotActivityItemArray[i].Name}</span>
+          <div class="lightbox" id ="${hotActivityItemArray[i].ActivityID}">
+            <div class="lightbox_all">
+              <div class="lightbox_left">
+                <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                  <span class="lightbox_span">${hotActivityItemArray[i].ActivityName}</span>
                   <p class="lightbox_p">${hotActivityItemArray[i].Description}</p>
-                </div>
-                <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+                  <div class="lightbox_detail">
+                    <div>
+                      <img src='./img/lightbox_time.png'>
+                      <span>${hotActivityItemArray[i].StartTime.substring(0, 10)} ~ ${hotActivityItemArray[i].EndTime.substring(0, 10)}</span>
+                    </div>
+                    <div>
+                      <img src='./img/lightbox_address.png'>
+                      <span>${hotActivityItemArray[i].Address ?? "沒有提供詳細地址"}</span>
+                    </div>
+                    <div>
+                      <img src='./img/lightbox_phone.png'>
+                      <span>${hotActivityItemArray[i].Phone ?? "沒有提供電話號碼"}</span>
+                    </div>
+                  </div>
               </div>
+              <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+            </div>
             </div>
           `
       }
@@ -231,6 +353,7 @@ axios.get(
     const thisData = response.data
     console.log(thisData)
     let str = ""
+    let lightboxStr = ""
     let hotScenicSpotItemArray = []
 
     thisData.forEach(item => {
@@ -244,14 +367,39 @@ axios.get(
 
       str +=
         `
-        <div class="list_card">
+        <a class="list_card" href="#${hotScenicSpotItemArray[i].ScenicSpotID}">
           <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-          <span class="list_sapn">${hotScenicSpotItemArray[i].Name}</span>
+          <span class="list_sapn">${hotScenicSpotItemArray[i].ScenicSpotName}</span>
           <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${hotScenicSpotItemArray[i].Address ?? "沒有提供詳細地址"}</span></div>
-        </div>
+        </a>
+        `
+
+      lightboxStr +=
+        `
+          <div class="lightbox" id="${hotScenicSpotItemArray[i].ScenicSpotID}">
+            <div class="lightbox_all">
+              <div class="lightbox_left">
+                <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
+                <span class="lightbox_span">${hotScenicSpotItemArray[i].ScenicSpotName}</span>
+                <p class="lightbox_p">${hotScenicSpotItemArray[i].Description}</p>
+                <div class="lightbox_detail">
+                  <div>
+                    <img src='./img/lightbox_address.png'>
+                    <span>${thisData[i].Address ?? "沒有提供詳細地址"}</span>
+                  </div>
+                  <div>
+                    <img src='./img/lightbox_phone.png'>
+                    <span>${thisData[i].Phone ?? "沒有提供電話號碼"}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
+            </div>
+          </div>
         `
     }
     hotScenicSpotList.innerHTML = str
+    lightboxContainer2.innerHTML = lightboxStr
   })
   .catch(function (error) {
     console.log(error)
@@ -347,21 +495,31 @@ slides.addEventListener("click", function (e) {
           img.src = thisData[i].Picture.PictureUrl1
           str +=
             `
-          <a class="list_card" href="#${thisData[i].ID}ScenicSpot">
+          <a class="list_card" href="#${thisData[i].ScenicSpotID}">
             <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-            <span class="list_sapn">${thisData[i].Name}</span>
+            <span class="list_sapn">${thisData[i].ScenicSpotName}</span>
             <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${thisData[i].Address ?? "沒有提供詳細地址"}</span></div>
           </a>
           `
 
           lightboxStr +=
             `
-          <div class="lightbox" id="${thisData[i].ID}ScenicSpot">
+          <div class="lightbox" id="${thisData[i].ScenicSpotID}">
             <div class="lightbox_all">
               <div class="lightbox_left">
                 <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
-                <span class="lightbox_span">${thisData[i].Name}</span>
+                <span class="lightbox_span">${thisData[i].ScenicSpotName}</span>
                 <p class="lightbox_p">${thisData[i].DescriptionDetail}</p>
+                <div class="lightbox_detail">
+                  <div>
+                    <img src='./img/lightbox_address.png'>
+                    <span>${thisData[i].Address ?? "沒有提供詳細地址"}</span>
+                  </div>
+                  <div>
+                    <img src='./img/lightbox_phone.png'>
+                    <span>${thisData[i].Phone ?? "沒有提供電話號碼"}</span>
+                  </div>
+                </div>
               </div>
               <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
             </div>
@@ -409,21 +567,35 @@ slides.addEventListener("click", function (e) {
           img.src = thisData[i].Picture.PictureUrl1
           str +=
             `
-          <a class="list_card" href="#${thisData[i].ID}Activity">
+          <a class="list_card" href="#${thisData[i].ActivityID}Activity">
             <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="list_img">
-            <span class="list_sapn">${thisData[i].Name}</span>
+            <span class="list_sapn">${thisData[i].ActivityName}</span>
             <div class="address_container"><img src="./img/icon_map.png" class="icon_map"><span class="address_span">${thisData[i].Address ?? "沒有提供詳細地址"}</span></div>
           </a>
           `
 
           lightboxStr +=
             `
-          <div class="lightbox" id="${thisData[i].ID}Activity">
+          <div class="lightbox" id="${thisData[i].ActivityID}Activity">
             <div class="lightbox_all">
               <div class="lightbox_left">
                 <img src="${img.src}" onerror="this.src='./img/placeholder.png'" class="lightbox_img">
-                <span class="lightbox_span">${thisData[i].Name}</span>
+                <span class="lightbox_span">${thisData[i].ActivityName}</span>
                 <p class="lightbox_p">${thisData[i].Description}</p>
+                <div class="lightbox_detail">
+                  <div>
+                    <img src='./img/lightbox_time.png'>
+                    <span>${thisData[i].StartTime.substring(0, 10)} ~ ${thisData[i].EndTime.substring(0, 10)}</span>
+                  </div>
+                  <div>
+                    <img src='./img/lightbox_address.png'>
+                    <span>${thisData[i].Address ?? "沒有提供詳細地址"}</span>
+                  </div>
+                  <div>
+                    <img src='./img/lightbox_phone.png'>
+                    <span>${thisData[i].Phone ?? "沒有提供電話號碼"}</span>
+                  </div>
+                </div>
               </div>
               <div class="lightbox_right"><a href="#none" class="lightbox_a"><i class="fas fa-times"></i></a></div>
             </div>

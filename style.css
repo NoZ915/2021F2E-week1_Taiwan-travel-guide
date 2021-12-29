@@ -653,6 +653,7 @@ footer span,footer a{
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .lightbox_left{
   display: flex;
@@ -706,6 +707,20 @@ footer span,footer a{
 
   font-size: 30px;
   color: #fff;
+}
+.lightbox_detail{
+  margin-left: 34.5px;
+}
+.lightbox_detail div{
+  margin-top: 15px;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #0D0B0C;
+}
+.lightbox_detail div:nth-child(1){
+  margin-top: 22px;
 }
 
 /* -----wrong search page----- */
