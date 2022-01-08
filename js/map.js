@@ -184,13 +184,22 @@ send.addEventListener("click", function () {
         filterData.forEach((item) => {
           if (item != undefined) {
             //顏色區分：租借歸還區塊
-            let availableColor = ""
+            let availableRentColor = ""
             if (item.AvailableRentBikes <= 5) {
-              availableColor = "colorRed";
+              availableRentColor = "colorRed";
             } else if (item.AvailableRentBikes == 0) {
-              availableColor = "colorGrey";
+              availableRentColor = "colorGrey";
             } else {
-              availableColor = "colorGreen";
+              availableRentColor = "colorGreen";
+            }
+            //顏色區分：租借歸還區塊
+            let availableReturnColor = ""
+            if (item.AvailableReturnBikes <= 5) {
+              availableReturnColor = "colorRed";
+            } else if (item.AvailableReturnBikes == 0) {
+              availableReturnColor = "colorGrey";
+            } else {
+              availableReturnColor = "colorGreen";
             }
 
             //更新時間資料處理
@@ -204,8 +213,8 @@ send.addEventListener("click", function () {
               <span class="search-result_StationName">${item.StationName}</span>
               <span class="search-result_StationAddress">${item.StationAddress}</span>
               <span>
-                <div class="${availableColor} search-result_Available">可租借 ${item.AvailableRentBikes}</div>
-                <div class="${availableColor} search-result_Available">可歸還 ${item.AvailableReturnBikes}</div>
+                <div class="${availableRentColor} search-result_Available">可租借 ${item.AvailableRentBikes}</div>
+                <div class="${availableReturnColor} search-result_Available">可歸還 ${item.AvailableReturnBikes}</div>
                 <button data-lat="${item.StationPosition.PositionLat}" data-lon="${item.StationPosition.PositionLon}">詳情</button>
               </span>
               <span class="search-result_updateTimeAndDate">Last update: ${updateTimeAndDate}</span>
@@ -290,13 +299,22 @@ var markers
 function setMarker(filterDataItem) {
   filterDataItem.forEach((item) => {
     //顏色區分：租借歸還區塊
-    let availableColor = ""
+    let availableRentColor = ""
     if (item.AvailableRentBikes <= 5) {
-      availableColor = "colorRed";
+      availableRentColor = "colorRed";
     } else if (item.AvailableRentBikes == 0) {
-      availableColor = "colorGrey";
+      availableRentColor = "colorGrey";
     } else {
-      availableColor = "colorGreen";
+      availableRentColor = "colorGreen";
+    }
+    //顏色區分：租借歸還區塊
+    let availableReturnColor = ""
+    if (item.AvailableReturnBikes <= 5) {
+      availableReturnColor = "colorRed";
+    } else if (item.AvailableReturnBikes == 0) {
+      availableReturnColor = "colorGrey";
+    } else {
+      availableReturnColor = "colorGreen";
     }
 
     //更新時間資料處理
@@ -348,8 +366,8 @@ function setMarker(filterDataItem) {
         <span class="card_StationName">${item.StationName}</span>
         <span class="card_StationAddress">${item.StationAddress}</span>
         <span>
-          <div class="${availableColor} card_Available">可租借 ${item.AvailableRentBikes}</div>
-          <div class="${availableColor} card_Available">可歸還 ${item.AvailableReturnBikes}</div>
+          <div class="${availableRentColor} card_Available">可租借 ${item.AvailableRentBikes}</div>
+          <div class="${availableReturnColor} card_Available">可歸還 ${item.AvailableReturnBikes}</div>
           <div></div>
         </span>
         <span class="card_updateTimeAndDate">Last update: ${updateTimeAndDate}</span>

@@ -179,7 +179,7 @@
   width: 69px;
   height: 40px;
   border-radius: 4px;
-  /* background: #DFE4CE; */
+  background: #DFE4CE;
 
   text-align: center;
   justify-content: center;
@@ -188,6 +188,12 @@
   font-weight: bold;
   font-size: 10px;
   line-height: 20px;
+}
+.colorGrey{
+  background-color: #EEEEEE;
+}
+.colorRed{
+  background-color: #F7D4DD;
 }
 .search-result_updateTimeAndDate{
   margin-top: 8px;
