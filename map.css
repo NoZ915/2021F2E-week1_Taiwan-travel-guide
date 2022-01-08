@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/earlyaccess/notosanstc.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
 *{
   /* outline: 1px black solid; */
+  margin: 0;
+  padding: 0;
+
+  font-family: "Noto Sans TC";
 }
+
+
+/*-----map部分-----*/
 .map-page_section{
   display: flex;
   flex-direction: row;
@@ -9,7 +19,7 @@
 #map{
   width: 792px;
   height: 739px;
-  margin-top: 15px;
+  margin-top: 35px;
   margin-bottom: 15px;
   z-index: 0;
 
@@ -20,47 +30,170 @@
   margin-right: 25px;
 }
 
+/*-----按鈕部分-----*/
 .send{
   border: none;
   cursor: pointer;
 }
 
-/* markerCluster */
-.marker-cluster-small {
-		background-color: rgba(181, 226, 140, 0.6);
-		}
-  .marker-cluster-small div {
-    background-color: rgba(110, 204, 57, 0.6);
-    }
+/*-----地圖卡片部分-----*/
+.card span{
+  display: flex;
+}
+.card_StationName{
+  margin-bottom: 8px;
 
-  .marker-cluster-medium {
-    background-color: rgba(241, 211, 87, 0.6);
-    }
-  .marker-cluster-medium div {
-    background-color: rgba(240, 194, 12, 0.6);
-    }
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.03em;
+  color: #474F2C;
+}
+.card_StationAddress{
+  margin-bottom: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 5px;
+  line-height: 20px;
+  letter-spacing: 0.03em;
+  color: #2B2B2B;
+}
+.card_Available{
+  display: flex;
+  margin-right: 12px;
+  width: 69px;
+  height: 40px;
+  border-radius: 4px;
+  background: #DFE4CE;
 
-  .marker-cluster-large {
-    background-color: rgba(253, 156, 115, 0.6);
-    }
-  .marker-cluster-large div {
-    background-color: rgba(241, 128, 23, 0.6);
-    }
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 
-  .marker-cluster {
-    background-clip: padding-box;
-    border-radius: 20px;
-    }
-  .marker-cluster div {
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
-    margin-top: 5px;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 20px;
+}
+.colorGrey{
+  background-color: #EEEEEE;
+}
+.colorRed{
+  background-color: #F7D4DD;
+}
+.card_updateTimeAndDate{
+  margin-top: 8px;
+  
+  font-style: normal;
+  font-weight: normal;
+  color: #B9B9B9;
+}
 
-    text-align: center;
-    border-radius: 15px;
-    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
-    }
-  .marker-cluster span {
-    line-height: 30px;
-    }
+/*-----左邊list部分-----*/
+.search-result_container{
+  margin-top: 35px;
+}
+#city-select{
+  border: 0;
+  border-radius: 6px;
+  margin-right: 7px;
+  padding-left: 16px;
+  width: 219px;
+  height: 40px;
+  vertical-align: middle;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+}
+.search-result-list{
+  height: 685px;
+  overflow: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.search-result{
+  display: flex;
+  flex-direction: column;
+  width: 410px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+.search-result span{
+  display: flex;
+}
+.search-result button{
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #FF1D6C;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 120px;
+  height: 40px;
+  left: 147px;
+  top: 0px;
+  margin-left: 27px;
+  background-color: #fff;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 35px;
+  color: #FF1D6C;
+  transition: 0.2s ease-in-out;
+}
+.search-result button:hover{
+  background-color: #FF1D6C;
+  color: #fff;
+  transition: 0.2s ease-in-out;
+}
+.search-result_StationName{
+  margin-bottom: 8px;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.03em;
+  color: #474F2C;
+}
+.search-result_StationAddress{
+  margin-bottom: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 5px;
+  line-height: 20px;
+  letter-spacing: 0.03em;
+  color: #2B2B2B;
+}
+.search-result_Available{
+  display: flex;
+  margin-right: 12px;
+  width: 69px;
+  height: 40px;
+  border-radius: 4px;
+  background: #DFE4CE;
+
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 20px;
+}
+.search-result_updateTimeAndDate{
+  margin-top: 8px;
+  
+  font-style: normal;
+  font-weight: normal;
+  font-size: 5px;
+  color: #B9B9B9;
+}

@@ -51,57 +51,70 @@ if (navigator.geolocation) {
 //--------------------------------
 const send = document.querySelector(".send")
 const city = document.querySelector(".city")
+const dataItem = document.querySelectorAll("[data-item]")
+const searchResultList = document.querySelector(".search-result-list")
 let Data = [];
 let filterData = [];
 //--------------------------------
 //        縣市大致座標整理
 //--------------------------------
-var cityPosition = {
-  Taipei: {
+var cityPosition = [
+  {
+    name: "Taipei",
     latitude: 25.047778,
     longtitude: 121.531944
   },
-  NewTaipei: {
+  {
+    name: "NewTaipei",
     latitude: 25.011111,
     longtitude: 121.445833
   },
-  Taoyuan: {
+  {
+    name: "Taoyuan",
     latitude: 24.850000,
     longtitude: 121.216667
   },
-  Taichung: {
+  {
+    name: "Taichung",
     latitude: 24.150000,
     longtitude: 120.666667
   },
-  Tainan: {
+  {
+    name: "Tainan",
     latitude: 22.983333,
     longtitude: 120.183333
   },
-  Kaohsiung: {
+  {
+    name: "Kaohsiung",
     latitude: 22.616667,
     longtitude: 120.300000
   },
-  Hsinchu: {
+  {
+    name: "Hsinchu",
     latitude: 24.804722,
     longtitude: 120.971389
   },
-  MiaoliCounty: {
+  {
+    name: "MiaoliCounty",
     latitude: 24.563333,
     longtitude: 120.825833
   },
-  Chiayi: {
+  {
+    name: "Chiayi",
     latitude: 23.480000,
     longtitude: 120.449722
   },
-  PingtungCounty: {
+  {
+    name: "PingtungCounty",
     latitude: 22.675556,
     longtitude: 120.491389
   },
-  KinmenCounty: {
+  {
+    name: "KinmenCounty",
     latitude: 24.433333,
     longtitude: 118.333333
   },
-}
+]
 //--------------------------------
 //        點擊搜尋按鈕時執行
 //--------------------------------
@@ -109,10 +122,13 @@ send.addEventListener("click", function () {
   const cityName = city.value;
   getStationData(cityName);
   //設定新的定位座標
-  const cityNameObj = eval(cityName);
-  console.log(cityNameObj)
-  console.log(cityPosition.KinmenCounty.latitude, cityPosition.KinmenCounty.longtitude)
-  // map.setView([cityPosition.cityName.latitude, cityPosition.cityName.longtitude], 14);
+  let index = "";
+  for (let i = 0; i < cityPosition.length; i++) {
+    if (cityPosition[i].name == cityName) {
+      index = i;
+    }
+  }
+  map.setView([cityPosition[index].latitude, cityPosition[index].longtitude], 15);
 
   //搜尋縣市租借站位資料
   function getStationData(cityName) {
@@ -125,7 +141,6 @@ send.addEventListener("click", function () {
       .then(function (response) {
         Data = response.data;
         getAvailableData(cityName)
-        console.log(Data)
       })
       .catch(function (error) {
         console.log(error);
@@ -142,6 +157,7 @@ send.addEventListener("click", function () {
       }
     )
       .then(function (response) {
+        //-----marker部分-----//
         const availableData = response.data;
         console.log(availableData)
         //先將陣列清空
@@ -155,13 +171,54 @@ send.addEventListener("click", function () {
             if (availableItem.StationUID === stationItem.StationUID) {
               availableItem.StationName = stationItem.StationName.Zh_tw;
               availableItem.StationAddress = stationItem.StationAddress.Zh_tw;
-              availableItem.StaionPosition = stationItem.StationPosition;
+              availableItem.StationPosition = stationItem.StationPosition;
               filterData.push(availableItem);
             }
           })
         })
         console.log(filterData);
         setMarker(filterData);
+
+        //-----list部分-----//
+        let str = "";
+        filterData.forEach((item) => {
+          if (item != undefined) {
+            //顏色區分：租借歸還區塊
+            let availableColor = ""
+            if (item.AvailableRentBikes <= 5) {
+              availableColor = "colorRed";
+            } else if (item.AvailableRentBikes == 0) {
+              availableColor = "colorGrey";
+            } else {
+              availableColor = "colorGreen";
+            }
+
+            //更新時間資料處理
+            let updateDateString = item.UpdateTime.substring(0, 10)
+            let updateTimeString = item.UpdateTime.substring(11, 19)
+            let updateTimeAndDate = updateDateString + " " + updateTimeString
+
+            str +=
+              `
+            <div class="search-result">
+              <span class="search-result_StationName">${item.StationName}</span>
+              <span class="search-result_StationAddress">${item.StationAddress}</span>
+              <span>
+                <div class="${availableColor} search-result_Available">可租借 ${item.AvailableRentBikes}</div>
+                <div class="${availableColor} search-result_Available">可歸還 ${item.AvailableReturnBikes}</div>
+                <button data-lat="${item.StationPosition.PositionLat}" data-lon="${item.StationPosition.PositionLon}">詳情</button>
+              </span>
+              <span class="search-result_updateTimeAndDate">Last update: ${updateTimeAndDate}</span>
+            </div>
+            `
+          }
+        })
+        searchResultList.innerHTML = str
+
+        //點擊左邊列表，地圖座標會重新定位到該位置上
+        searchResultList.addEventListener('click', function (e) {
+          map.setView([e.target.getAttribute("data-lat"), e.target.getAttribute("data-lon")], 24);
+        })
       })
       .catch(function (error) {
         console.log(error);
@@ -214,7 +271,7 @@ function getNearbyAvailibleData(longtitude, latitude) {
           if (nearbyAvailableDataItem.StationUID === nearbyStationItem.StationUID) {
             nearbyAvailableDataItem.StationName = nearbyStationItem.StationName.Zh_tw;
             nearbyAvailableDataItem.StationAddress = nearbyStationItem.StationAddress.Zh_tw;
-            nearbyAvailableDataItem.StaionPosition = nearbyStationItem.StationPosition;
+            nearbyAvailableDataItem.StationPosition = nearbyStationItem.StationPosition;
             nearbyFilterData.push(nearbyAvailableDataItem);
           }
         })
@@ -235,11 +292,11 @@ function setMarker(filterDataItem) {
     //顏色區分：租借歸還區塊
     let availableColor = ""
     if (item.AvailableRentBikes <= 5) {
-      availableColor = "#F7D4DD";
+      availableColor = "colorRed";
     } else if (item.AvailableRentBikes == 0) {
-      availableColor = "#EEEEEE";
+      availableColor = "colorGrey";
     } else {
-      availableColor = "#DFE4CE";
+      availableColor = "colorGreen";
     }
 
     //更新時間資料處理
@@ -284,18 +341,18 @@ function setMarker(filterDataItem) {
 
     //渲染標記上去地圖
     var markers = new L.MarkerClusterGroup().addTo(map);
-    markers.addLayer(L.marker([item.StaionPosition.PositionLat, item.StaionPosition.PositionLon], { icon: iconColor }))
+    markers.addLayer(L.marker([item.StationPosition.PositionLat, item.StationPosition.PositionLon], { icon: iconColor }))
     markers.bindPopup(
       `
       <div class="card">
-        <span>${item.StationName}</span>
-        <span>${item.StationAddress}</span>
+        <span class="card_StationName">${item.StationName}</span>
+        <span class="card_StationAddress">${item.StationAddress}</span>
         <span>
-          <div class=${availableColor}>可租借${item.AvailableRentBikes}</div>
-          <div class=${availableColor}>可歸還${item.AvailableReturnBikes}</div>
+          <div class="${availableColor} card_Available">可租借 ${item.AvailableRentBikes}</div>
+          <div class="${availableColor} card_Available">可歸還 ${item.AvailableReturnBikes}</div>
           <div></div>
         </span>
-        <span>Last update: ${updateTimeAndDate}</span>
+        <span class="card_updateTimeAndDate">Last update: ${updateTimeAndDate}</span>
       </div>
       `
     )

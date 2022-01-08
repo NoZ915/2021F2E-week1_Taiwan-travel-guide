@@ -407,27 +407,6 @@ axios.get(
 
 
 
-//--------------------------------
-//     getAuthorizationHeader
-//--------------------------------
-function getAuthorizationHeader() {
-  //  填入自己 ID、KEY 開始
-  let AppID = '4f2c7e3696e84ec2bcf3d7a3ba93abe7';
-  let AppKey = 'ygFUYETAQklHaLKz5pNSF4FPwrA';
-  //  填入自己 ID、KEY 結束
-  let GMTString = new Date().toGMTString();
-  let ShaObj = new jsSHA('SHA-1', 'TEXT');
-  ShaObj.setHMACKey(AppKey, 'TEXT');
-  ShaObj.update('x-date: ' + GMTString);
-  let HMAC = ShaObj.getHMAC('B64');
-  let Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"';
-  return { 'Authorization': Authorization, 'X-Date': GMTString };
-}
-
-//拿到 App ID 和 App Key 後就可以開始拿資料了，只是取資料的時候必須使用平臺提供的 HMAC 認證授權機制。
-//HMAC 授權機制在每次取得 API 時要在 header 塞兩個參數：Authorization 和 X-Date。
-
-
 
 //--------------------------------
 // slides: a新增onclick事件，可滑動
@@ -611,3 +590,26 @@ slides.addEventListener("click", function (e) {
       console.log(error)
     })
 })
+
+
+
+
+//--------------------------------
+//     getAuthorizationHeader
+//--------------------------------
+function getAuthorizationHeader() {
+  //  填入自己 ID、KEY 開始
+  let AppID = '4f2c7e3696e84ec2bcf3d7a3ba93abe7';
+  let AppKey = 'ygFUYETAQklHaLKz5pNSF4FPwrA';
+  //  填入自己 ID、KEY 結束
+  let GMTString = new Date().toGMTString();
+  let ShaObj = new jsSHA('SHA-1', 'TEXT');
+  ShaObj.setHMACKey(AppKey, 'TEXT');
+  ShaObj.update('x-date: ' + GMTString);
+  let HMAC = ShaObj.getHMAC('B64');
+  let Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"';
+  return { 'Authorization': Authorization, 'X-Date': GMTString };
+}
+
+//拿到 App ID 和 App Key 後就可以開始拿資料了，只是取資料的時候必須使用平臺提供的 HMAC 認證授權機制。
+//HMAC 授權機制在每次取得 API 時要在 header 塞兩個參數：Authorization 和 X-Date。
