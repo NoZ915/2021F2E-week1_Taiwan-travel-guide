@@ -185,7 +185,7 @@ send.addEventListener("click", function () {
           if (item != undefined) {
             //顏色區分：租借歸還區塊
             let availableRentColor = ""
-            if (item.AvailableRentBikes <= 5) {
+            if (item.AvailableRentBikes <= 5 && item.AvailableRentBikes > 0) {
               availableRentColor = "colorRed";
             } else if (item.AvailableRentBikes == 0) {
               availableRentColor = "colorGrey";
@@ -194,7 +194,7 @@ send.addEventListener("click", function () {
             }
             //顏色區分：租借歸還區塊
             let availableReturnColor = ""
-            if (item.AvailableReturnBikes <= 5) {
+            if (item.AvailableReturnBikes <= 5 && item.AvailableRentBikes > 0) {
               availableReturnColor = "colorRed";
             } else if (item.AvailableReturnBikes == 0) {
               availableReturnColor = "colorGrey";
@@ -300,7 +300,7 @@ function setMarker(filterDataItem) {
   filterDataItem.forEach((item) => {
     //顏色區分：租借歸還區塊
     let availableRentColor = ""
-    if (item.AvailableRentBikes <= 5) {
+    if (item.AvailableRentBikes <= 5 && item.AvailableRentBikes > 0) {
       availableRentColor = "colorRed";
     } else if (item.AvailableRentBikes == 0) {
       availableRentColor = "colorGrey";
@@ -309,7 +309,7 @@ function setMarker(filterDataItem) {
     }
     //顏色區分：租借歸還區塊
     let availableReturnColor = ""
-    if (item.AvailableReturnBikes <= 5) {
+    if (item.AvailableReturnBikes <= 5 && item.AvailableRentBikes > 0) {
       availableReturnColor = "colorRed";
     } else if (item.AvailableReturnBikes == 0) {
       availableReturnColor = "colorGrey";
@@ -349,7 +349,7 @@ function setMarker(filterDataItem) {
     });
     //顏色區分：marker的icon顏色
     let iconColor = ""
-    if (item.AvailableRentBikes <= 5) {
+    if (item.AvailableRentBikes <= 5 && item.AvailableRentBikes > 0) {
       iconColor = redIcon;
     } else if (item.AvailableRentBikes == 0) {
       iconColor = greyIcon;
